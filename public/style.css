@@ -1,0 +1,322 @@
+/* ===== VARIÁVEIS ===== */
+:root {
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --surface-2: #f8fafc;
+  --border: #e2e8f0;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --danger: #ef4444;
+  --danger-dark: #dc2626;
+  --success: #22c55e;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+/* ===== RESET & BASE ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: var(--text);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 28px;
+  text-align: center;
+  letter-spacing: -0.02em;
+}
+
+/* ===== FORMULÁRIO (index.html) ===== */
+form {
+  background: var(--surface);
+  padding: clamp(20px, 5vw, 36px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  width: 100%;
+  max-width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border: 1px solid var(--border);
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px 15px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  outline: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+input::placeholder, textarea::placeholder {
+  color: #a0aec0;
+}
+
+textarea {
+  height: 120px;
+  resize: vertical;
+  min-height: 80px;
+}
+
+button {
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 13px 20px;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* ===== PAINEL ADMIN (admin.html) ===== */
+#listaMensagens {
+  width: 100%;
+  max-width: 680px;
+}
+
+.card-mensagem {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: clamp(16px, 4vw, 24px);
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card-mensagem:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.card-header h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.card-date {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  background: var(--surface-2);
+  padding: 3px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+
+.card-email {
+  font-size: 14px;
+  color: var(--primary);
+  margin: 0 0 10px 0;
+  word-break: break-word;
+}
+
+.card-mensagem > p:last-of-type {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  word-break: break-word;
+}
+
+.btn-apagar {
+  background-color: transparent;
+  color: var(--danger);
+  border: 1.5px solid var(--danger);
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 14px;
+  border-radius: var(--radius-sm);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.btn-apagar:hover {
+  background-color: var(--danger);
+  color: white;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* ===== TOAST ===== */
+.toast {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--success);
+  color: white;
+  padding: 14px 28px;
+  border-radius: 30px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  font-weight: 600;
+  font-size: 14px;
+  transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1000;
+  white-space: nowrap;
+}
+
+.toast.show {
+  bottom: 30px;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets */
+@media (max-width: 600px) {
+  body {
+    padding: 16px 12px;
+  }
+
+  form {
+    gap: 12px;
+  }
+
+  input, textarea, button {
+    font-size: 16px; /* evita zoom automático no iOS */
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .card-date {
+    align-self: flex-start;
+  }
+
+  .toast {
+    left: 12px;
+    right: 12px;
+    transform: none;
+    text-align: center;
+    white-space: normal;
+    border-radius: 14px;
+  }
+
+  .toast.show {
+    bottom: 20px;
+  }
+}
+
+/* Celulares pequenos */
+@media (max-width: 360px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  form {
+    padding: 16px;
+  }
+
+  .card-mensagem {
+    padding: 14px;
+ 
+  }
+}
+
+.btn-admin {
+  display: inline-block;
+  margin-top: 10%;
+  padding: 7px 10px;
+  background: var(--primary);
+  color: white;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-weight: 400;
+  transition: background 0.2s;
+}
+
+.btn-admin:hover {
+  background: var(--primary-dark);
+}
+
+/* ===== RODAPÉ ===== */
+.footer {
+  position: block;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 15px;
+  
+ 
+  text-align: center;
+}
+
+.footer p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+.footer a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.footer a:hover {
+  color: var(--primary-dark);
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .footer {
+    font-size: 13px;
+    padding: 16px 10px;
+  }
+}

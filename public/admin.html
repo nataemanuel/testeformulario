@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin - Mensagens</title>
+  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"> </head>
+<body>
+
+  <h1>Mensagens Recebidas</h1>
+
+  <div id="listaMensagens"></div>
+<footer class="footer">
+  <p>
+    © 2026 Todos os direitos reservados.
+    Desenvolvido por
+    <a href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener noreferrer">
+      Natã Emanuel
+    </a>
+  </p>
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <script>
+    function formatarData(dataString) {
+      if (!dataString) return "Data desconhecida";
+      const data = new Date(dataString);
+      return data.toLocaleString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    async function carregarMensagens() {
+      const resposta = await fetch("/mensagens");
+      const mensagens = await resposta.json();
+      const lista = document.getElementById("listaMensagens");
+      
+      lista.innerHTML = "";
+
+      mensagens.forEach(msg => {
+      const dataFormatada = formatarData(msg.data);
+
+        lista.innerHTML += `
+          <div class="card-mensagem">
+            <div class="card-header">
+              <h3>${msg.nome}</h3>
+              <span class="card-date">${dataFormatada}</span>
+            </div>
+            <p class="card-email"><strong>E-mail:</strong> ${msg.email}</p>
+            <p>${msg.mensagem}</p>
+            <button class="btn-apagar" onclick="apagarMensagem('${msg._id}')">
+              Apagar
+            </button>
+          </div>
+        `;
+      });
+    }
+
+    // 3. Modificamos a função para usar o SweetAlert2 moderno
+    function apagarMensagem(id) {
+      Swal.fire({
+        title: "Tem certeza?",
+        text: "Você não poderá reverter esta ação!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sim, apagar!",
+        cancelButtonText: "Cancelar",
+        background: '#1e1e1e', // Cor de fundo combinando com temas escuros (mude se seu site for claro)
+        color: '#fff'
+      }).then(async (result) => {
+        // Se o usuário clicou em "Sim, apagar!"
+        if (result.isConfirmed) {
+          
+          // Faz a exclusão
+          await fetch(`/mensagens/${id}`, {
+            method: "DELETE"
+          });
+          
+          // Recarrega a lista
+          carregarMensagens();
+
+          // Mostra uma confirmação bonita de sucesso
+          Swal.fire({
+            title: "Apagado!",
+            text: "A mensagem foi removida com sucesso.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false
+          });
+        }
+      });
+    }
+
+    carregarMensagens();
+  </script>
+</body>
+</html>
