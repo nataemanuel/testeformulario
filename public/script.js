@@ -1,3 +1,89 @@
+ 
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      // ANIMAÇÃO
+
+      const elements = document.querySelectorAll('.fade');
+
+      const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+
+        });
+
+      }, { threshold: 0.2 });
+
+      elements.forEach(el => observer.observe(el));
+
+      // MENU HAMBURGUER
+
+      const menuToggle = document.getElementById('menu-toggle');
+      const nav = document.getElementById('nav');
+
+      menuToggle.addEventListener('click', () => {
+
+        nav.classList.toggle('active');
+
+        const icon = menuToggle.querySelector('i');
+
+        if (nav.classList.contains('active')) {
+          icon.classList.remove('fa-bars');
+          icon.classList.add('fa-xmark');
+        } else {
+          icon.classList.remove('fa-xmark');
+          icon.classList.add('fa-bars');
+        }
+
+      });
+
+    });
+    // ================= NAV ATIVA AO ROLAR =================
+
+const sections = document.querySelectorAll("section");
+const navLinks = document.querySelectorAll("nav a");
+
+const observerNav = new IntersectionObserver((entries) => {
+
+  entries.forEach(entry => {
+
+    if (entry.isIntersecting) {
+
+      const id = entry.target.getAttribute("id");
+
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+
+        // INÍCIO
+        if (!id && link.textContent.includes("Início")) {
+          link.classList.add("active");
+        }
+
+        // OUTRAS SEÇÕES
+        if (id && link.getAttribute("href") === `#${id}`) {
+          link.classList.add("active");
+        }
+
+      });
+
+    }
+
+  });
+
+}, {
+  threshold: 0.6
+});
+
+// OBSERVA TODAS AS SEÇÕES
+sections.forEach(section => {
+  observerNav.observe(section);
+});
+
+  
 const form = document.getElementById("formContato");
 const toast = document.getElementById("toast");
 

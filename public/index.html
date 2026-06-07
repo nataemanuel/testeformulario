@@ -1,33 +1,347 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Contato</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manga Transportes</title>
   <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-  <h1>Contato</h1>
+  <header>
+    <div class="logo">
+      <img src="img/logo.png" alt="Manga Transportes" width="110px" height="70px">
+    </div>
 
-  <form id="formContato">
-    <input type="text" id="nome" placeholder="Nome" required>
-    <input type="email" id="email" placeholder="Email" required>
-    <textarea id="mensagem" placeholder="Mensagem" required></textarea>
-    <button type="submit">Enviar</button>
-  </form>
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+
+    <nav id="nav">
+      <a href="#" class="active">Início</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#servicos">Serviços</a>
+      <a href="#frota">Frota</a>
+      <a href="#feedbacks">Feedbacks</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h2 class="fade">
+        Bem-vindo à<br>
+        Manga Transportes!
+      </h2>
+
+      <div class="line fade"></div>
+
+      <p class="fade">
+        Mais de uma década conectando pessoas e destinos com a máxima segurança, responsabilidade e conforto nas estradas paranaenses.
+      </p>
+
+      <a href="#sobre" class="hero-btn fade">
+        Saiba mais
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+      <div class="social-area fade">
+        <span>Siga-me nas redes sociais:</span>
+        <div class="social-links">
+          <a href="https://www.tiktok.com/@nattanemanuelreis" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a href="https://instagram.com/nattannemanuel" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sobre" id="sobre">
+    <div class="sobre-container">
+      <div class="sobre-texto">
+        <span class="sobre-subtitulo">SOBRE NÓS</span>
+        <h2>QUEM SOMOS?</h2>
+        <p>
+          A <strong>Manga Transportes</strong> é uma microempresa paranaense, sediada em Brasilândia do Sul – PR, com mais de dez anos de experiência no mercado de fretamento.
+        </p>
+        <p>
+          Somos especialistas no transporte de trabalhadores rurais e temos forte compromisso com a segurança, a pontualidade e a excelência no atendimento.
+        </p>
+
+        <div class="sobre-cards">
+          <div class="card">
+            <div class="icone"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <h3>ONDE ATUAMOS</h3>
+              <p>Atendemos diversos municípios da região com segurança, qualidade e responsabilidade.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="icone"><i class="fa-solid fa-users"></i></div>
+            <div>
+              <h3>NOSSA MISSÃO</h3>
+              <p>Fornecer um serviço digno, eficiente e confiável, priorizando sempre o conforto dos passageiros.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="visao-box">
+          <div class="icone-visao"><i class="fa-regular fa-star"></i></div>
+          <div>
+            <h3>NOSSA VISÃO</h3>
+            <p>Ser referência no setor de transporte rural, oferecendo atendimento humano e excelência em cada viagem.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sobre-imagem">
+        <img src="img/fundadores.avif" alt="Fundadores">
+        <div class="fundadores-box">
+          <i class="fa-solid fa-users"></i>
+          <div>
+            <h4>IRINEU E SOLANGE DA SILVA</h4>
+            <p>Fundadores da Manga Transportes</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="servicos" id="servicos">
+    <div class="servicos-topo fade">
+      <span class="servicos-subtitulo">NOSSOS SERVIÇOS</span>
+      <h2>SOLUÇÕES EM TRANSPORTE<br>COM SEGURANÇA</h2>
+      <p>
+        Oferecemos serviços especializados em fretamento, atendendo empresas, trabalhadores e passageiros com compromisso e pontualidade.
+      </p>
+    </div>
+
+    <div class="servicos-container">
+      <div class="servico-card fade">
+        <div class="servico-icone"><i class="fa-solid fa-bus"></i></div>
+        <h3>Fretamento Rural</h3>
+        <p>Transporte seguro para trabalhadores rurais, com rotas organizadas e compromisso com horários.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Rotas personalizadas</li>
+          <li><i class="fa-solid fa-check"></i> Pontualidade garantida</li>
+        </ul>
+      </div>
+
+      <div class="servico-card fade ">
+        <div class="servico-icone"><i class="fa-solid fa-building"></i></div>
+        <h3>Transporte Empresarial</h3>
+        <p>Soluções corporativas completas para empresas que precisam transportar colaboradores com.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Atendimento corporativo</li>
+          <li><i class="fa-solid fa-check"></i> Viagens programadas</li>
+        </ul>
+      </div>
+
+      <div class="servico-card fade">
+        <div class="servico-icone"><i class="fa-solid fa-road"></i></div>
+        <h3>Viagens e Excursões</h3>
+        <p>Transporte focado em eventos, turismo e excursões regionais, oferecendo tranquilidade.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Eventos e turismo</li>
+          <li><i class="fa-solid fa-check"></i> Conforto premium</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="frota" id="frota">
+    <div class="container">
+      <span class="subtitulo">NOSSA FROTA</span>
+      <h2>VEÍCULOS MODERNOS E DEVIDAMENTE REGULAMENTADOS</h2>
+      
+      <div class="frota-grid">
+        <div class="card-frota">
+          <div class="imagem">
+            <img src="img/onibus-rural.jpg" alt="Ônibus de Fretamento Rural">
+            <span>Campo & Cidade</span>
+          </div>
+          <div class="conteudo">
+            <h3>Ônibus de Fretamento</h3>
+            <p>Veículos robustos preparados para o trajeto rural e rodoviário, garantindo trajetos diários sem imprevistos.</p>
+            <ul>
+              <li>Manutenções preventivas rigorosas</li>
+              <li>Poltronas confortáveis e higienizadas</li>
+              <li>Motoristas altamente qualificados</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card-frota">
+          <div class="imagem">
+            <img src="img/microonibus.jpg" alt="Micro-ônibus de Excursões">
+            <span>Turismo & Eventos</span>
+          </div>
+          <div class="conteudo">
+            <h3>Micro-ônibus Modernos</h3>
+            <p>Ideal para transporte corporativo de equipes e excursões regionais que exigem agilidade e alto conforto.</p>
+            <ul>
+              <li>Ar-condicionado e climatização</li>
+              <li>Acomodação ideal para médias distâncias</li>
+              <li>Seguro total para os passageiros</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feedbacks" id="feedbacks">
+    <div class="container">
+      <div class="feedbacks-topo">
+        <span class="sobre-subtitulo">FEEDBACKS</span>
+        <h2>O QUE DIZEM NOSSOS PASSAGEIROS</h2>
+      </div>
+      
+      <div class="feedbacks-grid">
+        <div class="card-feedback">
+          <div class="feedback-estrelas">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p>"Empresa de extrema confiança. Trabalho na colheita e usamos o transporte do Seu Irineu todos os dias. Nunca atrasa e o ônibus é sempre limpo."</p>
+          <div class="feedback-usuario">
+            <h4>José Almeida</h4>
+            <span>Trabalhador Rural</span>
+          </div>
+        </div>
+
+        <div class="card-feedback">
+          <div class="feedback-estrelas">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p>"Fechamos uma excursão regional com a Manga Transportes e o atendimento do início ao fim foi impecável. Motorista prudente e atencioso."</p>
+          <div class="feedback-usuario">
+            <h4>Mariana Souza</h4>
+            <span>Organizadora de Eventos</span>
+          </div>
+        </div>
+
+        <div class="card-feedback">
+          <div class="feedback-estrelas">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p>"Contratamos para o fretamento dos colaboradores da nossa usina. Pontualidade britânica e excelente custo-benefício para nossa empresa."</p>
+          <div class="feedback-usuario">
+            <h4>Ricardo Dias</h4>
+            <span>Gestor de RH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" class="contact-section">
+    <div class="container">
+      <div class="contact-content">
+        <div class="contact-info">
+          <span class="sobre-subtitulo">FALE CONOSCO</span>
+          <h2>Entre em contato conosco!</h2>
+          <p>E descubra como a Manga Transportes pode ajudar sua empresa ou seu grupo de viagem.</p>
+
+          <ul class="contact-details">
+            <li><i class="fas fa-phone-alt"></i><span>+55 (44) 98438-5432</span></li>
+            <li><i class="fas fa-envelope"></i><span>mangatransportes@gmail.com</span></li>
+          </ul>
+
+          <a href="https://wa.me/5544984385432" target="_blank" class="cta-button">
+            <i class="fab fa-whatsapp"></i> Fale Conosco no WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-form-wrapper">
+          <form class="contact-form" id="formContato">
+            <label for="nome">Seu Nome:</label>
+            <input type="text" id="nome" name="name" required placeholder="Digite seu nome completo">
+
+            <label for="email">Seu Email:</label>
+            <input type="email" id="email" name="email" required placeholder="Ex: seuemail@email.com">
+
+            <label for="mensagem">Sua Mensagem:</label>
+            <textarea id="mensagem" name="message" required placeholder="Como podemos ajudar você?"></textarea>
+
+            <button type="submit" class="form-submit-button">
+              Enviar Mensagem
+            </button>
+          </form>
+
+          <p class="privacy-terms">
+            Ao enviar esta mensagem, você concorda com nossa 
+            <a href="politicadeprivacidade.html" target="_blank">Política de Privacidade</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-moderno">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="col-info">
+          <a href="#">
+            <img src="img/logo.png" alt="Manga Transportes" class="footer-logo-img">
+          </a>
+          <div>
+            <strong>Horário de Atendimento:</strong> <br>
+            <span>Segunda a Sábado: 08:00h - 18:00h</span>
+          </div>
+          <div class="contato-item">
+            <br>
+            <span><strong>Endereço:</strong><br>Rua Damião Albano de Farias, 571<br>Brasilândia do Sul - PR</span>
+          </div>
+        </div>
+
+        <div class="col-links">
+          <h4>Navegação</h4>
+          <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#frota">Nossa Frota</a></li>
+            <li><a href="#feedbacks">Feedbacks</a></li>
+            <li><a href="#contato">Contato</a></li>
+          </ul>
+        </div>
+
+        <div class="col-contato">
+          <h4>Fale Conosco</h4>
+          <div class="contato-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>+55 (44) 98438-5432</span>
+          </div>
+          <br>
+          <div class="contato-item">
+            <i class="fas fa-envelope"></i>
+            <span>mangatransportes@gmail.com</span>
+          </div>
+        </div>
+
+        <div class="col-legal">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="politica-privacidade.html">Política de Privacidade</a></li>
+            <li><a href="termos-de-uso.html">Termos de Uso</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-copyright">
+      <div class="container">
+        &copy; 2026, I da Silva & Cia Ltda. Todos os direitos reservados. CNPJ 44.625.209/0001-16.
+      </div>
+    </div>
+  </footer>
 
   <div id="toast" class="toast">Mensagem enviada com sucesso!</div>
-<a href="admin.html" class="btn-admin">Painel Administrativo</a>
-  <footer class="footer">
-  <p>
-    © 2026 Todos os direitos reservados.
-    Desenvolvido por
-    <a href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener noreferrer">
-      Natã Emanuel
-    </a>
-  </p>
-</footer>
   <script src="script.js"></script>
 </body>
 </html>
