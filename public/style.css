@@ -110,7 +110,7 @@ nav a.active::after {
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(to right, rgba(245, 243, 239, 0.98) 10%, rgba(245, 241, 235, 0.4)),
-              url('img/banner.webp') center/cover no-repeat;
+              url('img/banner.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   padding: 120px 5% 60px;
