@@ -729,7 +729,7 @@ nav a.active::after {
 
 /* ================= CONTATO & FORMULÁRIO ================= */
 .contact-section { 
-  padding: 50px 0; 
+  padding: 250px 0; 
   background-color: var(--white); 
 }
 
