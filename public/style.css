@@ -25,7 +25,13 @@ body {
   color: #222;
   overflow-x: hidden;
 }
-
+.sobre,
+.servicos,
+.frota,
+.feedbacks,
+.contact-section {
+    min-height: calc(100vh - 70px);
+}
 /* Otimização de container global */
 .container {
   width: 100%;
@@ -104,7 +110,7 @@ nav a.active::after {
   width: 100%;
   min-height: 100vh;
   background: linear-gradient(to right, rgba(245, 243, 239, 0.98) 10%, rgba(245, 241, 235, 0.4)),
-              url('img/banner.png') center/cover no-repeat;
+              url('img/banner.webp') center/cover no-repeat;
   display: flex;
   align-items: center;
   padding: 120px 5% 60px;
@@ -729,7 +735,7 @@ nav a.active::after {
 
 /* ================= CONTATO & FORMULÁRIO ================= */
 .contact-section { 
-  padding: 250px 0; 
+  padding: 50px 0; 
   background-color: var(--white); 
 }
 
