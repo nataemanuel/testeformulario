@@ -50,6 +50,7 @@ header {
   justify-content: space-between;
   padding: 0 5%;
   position: fixed;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.08);
   top: 0;
   left: 0;
   z-index: 1000;
@@ -695,7 +696,7 @@ nav a.btn-orcamento::after {
 
 /* ================= SEÇÃO FEEDBACKS ================= */
 .feedbacks {
-  padding: 100px 0;
+   padding: 160px 0 100px 0;
   background: var(--white);
 }
 
@@ -719,7 +720,7 @@ nav a.btn-orcamento::after {
 
 .card-feedback {
   background: #fdfdfa;
-  border: 1px solid #f0f0e8;
+  border: 1px solid #e0e0de;
   padding: 35px 25px;
   border-radius: 20px;
   box-shadow: 0 5px 20px rgba(0,0,0,0.02);
@@ -968,22 +969,33 @@ nav a.btn-orcamento::after {
 /* ================= TOAST SYSTEM ================= */
 .toast {
   position: fixed;
-  bottom: -100px;
+  bottom: -150px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--primary);
   color: var(--white);
-  padding: 14px 30px;
-  border-radius: 30px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  font-weight: 600;
-  font-size: 14px;
+
+  padding: 25px 50px;
+  min-width: 450px;
+
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-align: center;
+
   transition: 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 2000;
 }
 
 .toast.show {
-  bottom: 30px;
+  bottom: 40px;
+}
+
+.toast i {
+  margin-right: 10px;
+  font-size: 1.3rem;
 }
 
 /* ================= RESPONSIVIDADE (NOTEBOOKS & CELULARES) ================= */
