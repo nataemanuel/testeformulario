@@ -1,128 +1,340 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitar Orçamento | Manga Transportes</title>
-    <link rel="stylesheet" href="orcamento.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Solicitar Orçamento - Manga Transportes</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .orcamento-section {
+      padding: 140px 0 80px;
+      background: #f8f8f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .orcamento-central {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    .animated-box {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+      width: 100%;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .animated-box.hide {
+      display: none;
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+
+    .animated-box.fade-in {
+      display: block;
+      animation: surgeBloco 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+    }
+
+    @keyframes surgeBloco {
+      from { opacity: 0; transform: scale(0.96) translateY(15px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .resultado-header {
+      text-align: center;
+      border-bottom: 2px solid #f0f0e8;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .resultado-header i {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    
+    .btn-voltar-topo {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 5px 0;
+      transition: color 0.2s ease, transform 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-voltar-topo:hover {
+      color: var(--primary);
+      transform: translateX(-3px);
+    }
+
+    .preco-estimado {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: center;
+      margin: 20px 0;
+    }
+    .detalhes-lista {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
+    }
+    .detalhes-lista li {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #f5f5f0;
+      font-size: 0.95rem;
+    }
+    .detalhes-lista li strong { color: var(--text-dark); text-align: right; max-width: 65%; }
+    
+    .btn-whatsapp-orcamento {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #25d366;
+      color: var(--white);
+      padding: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+    }
+    .btn-whatsapp-orcamento:hover {
+      background-color: #1ebd59;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+    }
+    .aviso-estimativa {
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.4;
+    }
+    
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 480px) {
+      .form-row-2 { grid-template-columns: 1fr; gap: 0; }
+    }
+  </style>
 </head>
 <body>
 
-    <section class="orcamento">
-        <div class="container">
+  <header>
+    <div class="logo">
+      <a href="index.html">
+        <img src="img/logo.png" alt="Manga Transportes" width="120px" height="75px">
+      </a>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Início</a>
+      <a href="index.html#sobre">Sobre</a>
+      <a href="index.html#servicos">Serviços</a>
+      <a href="index.html#frota">Frota</a>
+      <a href="index.html#feedbacks">Feedbacks</a>
+      <a href="index.html#contato">Contato</a>
+      <a href="orcamento.html" class="btn-orcamento active">Solicitar Orçamento</a>
+    </nav>
+  </header>
 
-            <div class="titulo">
-                <h1>Solicite seu Orçamento</h1>
-                <p>Preencha o formulário abaixo e nossa equipe entrará em contato.</p>
+  <section class="orcamento-section">
+    <div class="container">
+      <div class="orcamento-central">
+        
+        <div class="animated-box" id="blocoFormulario">
+          <div style="text-align: center; margin-bottom: 30px;">
+            <span class="sobre-subtitulo">Simulação Rápida</span>
+            <h2 style="font-size: 1.8rem; color: var(--primary); font-weight: 800; margin-top: 10px;">
+              ORÇAMENTO INSTANTÂNEO
+            </h2>
+          </div>
+
+          <form class="contact-form" id="formCalculaOrcamento" style="padding: 0; box-shadow: none; background: none;">
+            <label for="nomeCliente">Seu Nome Completo:</label>
+            <input type="text" id="nomeCliente" required placeholder="Ex: João da Silva">
+
+            <label for="tipoServico">Tipo de Fretamento:</label>
+            <select id="tipoServico" style="width: 100%; padding: 12px 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 100%; background: var(--white); font-family: 'Montserrat', sans-serif;" required>
+              <option value="rural">Fretamento Rural / Usina</option>
+              <option value="empresarial">Transporte Empresarial / Corporativo</option>
+              <option value="excursao">Viagens e Excursões de Turismo</option>
+            </select>
+
+            <div class="form-row-2">
+              <div>
+                <label for="localOrigem">Local de Origem:</label>
+                <input type="text" id="localOrigem" required placeholder="Cidade ou endereço de saída">
+              </div>
+              <div>
+                <label for="localDestino">Local de Destino:</label>
+                <input type="text" id="localDestino" required placeholder="Cidade ou local de chegada">
+              </div>
             </div>
 
-            <form id="formOrcamento">
+            <div class="form-row-2">
+              <div>
+                <label for="dataIda">Data de Ida:</label>
+                <input type="date" id="dataIda" required style="width: 100%; padding: 12px 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 100%; background: var(--white);">
+              </div>
+              <div>
+                <label for="dataVolta">Data de Volta:</label>
+                <input type="date" id="dataVolta" required style="width: 100%; padding: 12px 15px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 8px; font-size: 100%; background: var(--white);">
+              </div>
+            </div>
 
-                <div class="grupo">
-                    <input type="text" placeholder="Nome Completo" required>
-                </div>
+            <div class="form-row-2">
+              <div>
+                <label for="qtdPessoas">Qtd. de Pessoas:</label>
+                <input type="number" id="qtdPessoas" min="1" max="250" required placeholder="Ex: 40">
+              </div>
+              <div>
+                <label for="distanciaKm">Distância Total (Km ida e volta):</label>
+                <input type="number" id="distanciaKm" min="1" required placeholder="Ex: 90">
+              </div>
+            </div>
 
-                <div class="grupo">
-                    <input type="text" placeholder="Empresa (Opcional)">
-                </div>
-
-                <div class="grupo">
-                    <input type="tel" placeholder="Telefone" required>
-                </div>
-
-                <div class="grupo">
-                    <input type="email" placeholder="E-mail" required>
-                </div>
-
-                <div class="duplo">
-                    <input type="text" placeholder="Cidade de Origem" required>
-                    <input type="text" placeholder="Cidade de Destino" required>
-                </div>
-
-                <div class="grupo">
-                    <select required>
-                        <option value="">Tipo de Carga</option>
-                        <option>Carga Fracionada</option>
-                        <option>Carga Fechada</option>
-                        <option>Produtos Industriais</option>
-                        <option>Alimentos</option>
-                        <option>Outros</option>
-                    </select>
-                </div>
-
-                <div class="grupo">
-                    <input type="number" placeholder="Peso Aproximado (Kg)">
-                </div>
-
-                <div class="grupo">
-                    <textarea placeholder="Informações adicionais"></textarea>
-                </div>
-
-                <button type="submit">
-                    Solicitar Orçamento
-                </button>
-
-            </form>
-
+            <button type="submit" class="form-submit-button" style="width: 100%; margin-top: 10px;">
+              <i class="fa-solid fa-calculator" style="margin-right: 8px;"></i> Calcular Valor
+            </button>
+          </form>
         </div>
-    </section>
-<footer class="footer-moderno">
-    <div class="containe">
-      <div class="footer-grid">
-        <div class="col-info">
-          <a href="#">
-            <img src="img/logo.png" alt="Manga Transportes" class="footer-logo-img">
+
+        <div class="animated-box hide" id="blocoResultado">
+          <button type="button" class="btn-voltar-topo" id="btnVoltarForm">
+            <i class="fa-solid fa-arrow-left-long"></i> Voltar e alterar dados
+          </button>
+
+          <div class="resultado-header">
+            <i class="fa-solid fa-circle-check"></i>
+            <h3>Cálculo Concluído!</h3>
+            <p>Estimativa gerada com sucesso:</p>
+          </div>
+          
+          <div class="preco-estimado" id="resPreco">R$ 0,00</div>
+
+          <ul class="detalhes-lista">
+            <li><span>Origem:</span> <strong id="resOrigem">-</strong></li>
+            <li><span>Destino:</span> <strong id="resDestino">-</strong></li>
+            <li><span>Período:</span> <strong id="resPeriodo">-</strong></li>
+            <li><span>Distância Informada:</span> <strong id="resDistancia">-</strong></li>
+            <li><span>Veículo Recomendado:</span> <strong id="resVeiculo">-</strong></li>
+          </ul>
+
+          <a href="#" id="btnEnviarWhats" target="_blank" class="btn-whatsapp-orcamento">
+            <i class="fab fa-whatsapp"></i> Confirmar no WhatsApp
           </a>
-          <div>
-            <strong>Horário de Atendimento:</strong> <br>
-            <span>Segunda a Sábado: 08:00h - 18:00h</span>
-          </div>
-          <div class="contato-item">
-            <br>
-            <span><strong>Endereço:</strong><br>Rua Damião Albano de Farias, 571<br>Brasilândia do Sul - PR</span>
-          </div>
+
+          <p class="aviso-estimativa">
+            *Valor estimado sujeito a validação de pedágios e taxas de rodagem definitivas pela nossa equipe.
+          </p>
         </div>
 
-        <div class="col-links">
-          <h4>Navegação</h4>
-          <ul>
-            <li><a href="#">Início</a></li>
-            <li><a href="#sobre">Sobre Nós</a></li>
-            <li><a href="#servicos">Serviços</a></li>
-            <li><a href="#frota">Nossa Frota</a></li>
-            <li><a href="#feedbacks">Feedbacks</a></li>
-            <li><a href="#contato">Contato</a></li>
-          </ul>
-        </div>
-
-        <div class="col-contato">
-          <h4>Fale Conosco</h4>
-          <div class="contato-item">
-            <i class="fas fa-phone-alt"></i>
-            <span>+55 (44) 98438-5432</span>
-          </div>
-          <br>
-          <div class="contato-item">
-            <i class="fas fa-envelope"></i>
-            <span>mangatransportes@gmail.com</span>
-          </div>
-        </div>
-
-        <div class="col-legal">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="politica-privacidade.html">Política de Privacidade</a></li>
-            <li><a href="termos-de-uso.html">Termos de Uso</a></li>
-          </ul>
-        </div>
       </div>
     </div>
+  </section>
 
-    <div class="footer-copyright">
-      <div class="containe">
-        &copy; 2026, I da Silva & Cia Ltda. Todos os direitos reservados. CNPJ 44.625.209/0001-16.
-      </div>
-    </div>
-  </footer>
+  <script>
+    const blocoFormulario = document.getElementById('blocoFormulario');
+    const blocoResultado = document.getElementById('blocoResultado');
+    const form = document.getElementById('formCalculaOrcamento');
+    const btnVoltar = document.getElementById('btnVoltarForm');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Captura de variáveis
+      const nome = document.getElementById('nomeCliente').value;
+      const servicoTexto = document.getElementById('tipoServico').options[document.getElementById('tipoServico').selectedIndex].text;
+      const origem = document.getElementById('localOrigem').value;
+      const destino = document.getElementById('localDestino').value;
+      const dataIda = document.getElementById('dataIda').value;
+      const dataVolta = document.getElementById('dataVolta').value;
+      const passageiros = parseInt(document.getElementById('qtdPessoas').value);
+      const distanciaTotal = parseFloat(document.getElementById('distanciaKm').value);
+
+      // Regras de cálculo (Manga Transportes)
+      let precoPorKm = 0;
+      let veiculoRecomendado = "";
+      const taxaBase = 150; 
+
+      if (passageiros <= 25) {
+        veiculoRecomendado = "Micro-ônibus (Até 25 lugares)";
+        precoPorKm = 4.50; 
+      } else if (passageiros <= 45) {
+        veiculoRecomendado = "Ônibus de Fretamento (Até 45 lugares)";
+        precoPorKm = 7.00;
+      } else {
+        const qtdVeiculos = Math.ceil(passageiros / 45);
+        veiculoRecomendado = `${qtdVeiculos}x Ônibus Grandes (Comboio)`;
+        precoPorKm = 7.00 * qtdVeiculos;
+      }
+
+      // Conta Matemática Base
+      const valorTotal = taxaBase + (distanciaTotal * precoPorKm);
+
+      // Formatação de datas para formato brasileiro (DD/MM/AAAA)
+      const fIda = dataIda.split('-').reverse().join('/');
+      const fVolta = dataVolta.split('-').reverse().join('/');
+
+      // Injeta os dados gerados na tela de resultado
+      document.getElementById('resPreco').innerText = valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+      document.getElementById('resOrigem').innerText = origem;
+      document.getElementById('resDestino').innerText = destino;
+      document.getElementById('resPeriodo').innerText = `De ${fIda} até ${fVolta}`;
+      document.getElementById('resDistancia').innerText = `${distanciaTotal} Km (Ida/Volta)`;
+      document.getElementById('resPassageiros').innerText = passageiros + " pessoas";
+      document.getElementById('resVeiculo').innerText = veiculoRecomendado;
+
+      // Monta o link completo com quebras de linha para o WhatsApp da empresa
+      const telefoneEmpresa = "5544984385432";
+      const mensagemWhats = `Olá Manga Transportes! Nova simulação de fretamento pelo site:\n\n` +
+                            `• *Cliente:* ${nome}\n` +
+                            `• *Fretamento:* ${servicoTexto}\n` +
+                            `• *Origem:* ${origem}\n` +
+                            `• *Destino:* ${destino}\n` +
+                            `• *Período:* De ${fIda} até ${fVolta}\n` +
+                            `• *Passageiros:* ${passageiros} pessoas\n` +
+                            `• *Distância:* ${distanciaTotal} Km\n\n` +
+                            `*Preço estimado:* ${valorTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })} (${veiculoRecomendado})`;
+
+      document.getElementById('btnEnviarWhats').href = `https://wa.me/${telefoneEmpresa}?text=${encodeURIComponent(mensagemWhats)}`;
+
+      // Executa a transição suave de telas ocultando o formulário
+      blocoFormulario.classList.add('hide');
+      blocoResultado.classList.remove('hide');
+      blocoResultado.classList.add('fade-in');
+    });
+
+    // Ação do Botão Superior Esquerdo (Voltar)
+    btnVoltar.addEventListener('click', function() {
+      blocoResultado.classList.remove('fade-in');
+      blocoResultado.classList.add('hide');
+      blocoFormulario.classList.remove('hide');
+      blocoFormulario.classList.add('fade-in');
+    });
+  </script>
 </body>
 </html>

@@ -695,9 +695,28 @@ nav a.btn-orcamento::after {
 }
 
 /* ================= SEÇÃO FEEDBACKS ================= */
+/* ================= SEÇÃO FEEDBACKS ================= */
 .feedbacks {
-   padding: 160px 0 100px 0;
-  background: var(--white);
+  position: relative;
+  padding: 160px 0 100px 0;
+  background: url('img/feedbacks.png') center/cover no-repeat;
+  z-index: 1;
+}
+
+/* Camada branca transparente por cima da imagem de fundo */
+.feedbacks::before {
+  content: "";
+  position: absolute;
+  inset: 0; 
+  background: rgba(255, 255, 255, 0.85); 
+
+  z-index: -1;
+}
+
+/* Deixar textos visíveis */
+.feedbacks-topo h2,
+.feedbacks-topo span {
+  color: var(--primary);
 }
 
 .feedbacks-topo {
@@ -741,7 +760,7 @@ nav a.btn-orcamento::after {
 
 .card-feedback p {
   font-style: italic;
-  color: var(--text-light);
+  color: var(--text-dark);
   line-height: 1.6;
   font-size: 0.98rem;
   margin-bottom: 20px;
@@ -755,13 +774,33 @@ nav a.btn-orcamento::after {
 
 .feedback-usuario span {
   font-size: 0.85rem;
-  color: #888;
+  color: #332f2f;
   font-weight: 500;
 }
+.feedbacks-btn {
+  text-align: center;
+  margin-top: 50px;
+}
 
+.btn-ver-mais {
+  display: inline-block;
+  padding: 14px 30px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn-ver-mais:hover {
+  background: var(--primary);
+  transform: translateY(-3px);
+}
 /* ================= CONTATO & FORMULÁRIO ================= */
 .contact-section { 
   padding: 50px 0; 
+  margin-top: 8%;
   background-color: var(--white); 
 }
 
@@ -1209,3 +1248,219 @@ nav a.btn-orcamento::after {
   }
 
 }
+/* ================= ANIMAÇÕES DE SCROLL & TIMING ================= */
+
+/* Estado inicial do elemento escondido */
+.fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+              transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+}
+
+/* Estado quando o JavaScript detecta a rolagem */
+.fade.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays para efeito cascata (elementos surgindo um após o outro) */
+.hero-content .fade:nth-child(1) { transition-delay: 0.1s; }
+.hero-content .fade:nth-child(2) { transition-delay: 0.2s; }
+.hero-content .fade:nth-child(3) { transition-delay: 0.3s; }
+.hero-content .fade:nth-child(4) { transition-delay: 0.4s; }
+.hero-content .fade:nth-child(5) { transition-delay: 0.5s; }
+
+/* ================= MICRO-INTERAÇÕES (EFEITOS DE HOVER) ================= */
+
+/* Suavizar a subida e a sombra dos cards de Serviço */
+.servico-card {
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.4s ease, 
+              background-color 0.3s ease;
+}
+
+/* Efeito sutil nos ícones dos cards ao passar o mouse */
+.servico-card:hover .servico-icone i {
+  transform: scale(1.15) rotate(-5deg);
+  transition: transform 0.3s ease;
+}
+.servico-icone i {
+  transition: transform 0.3s ease;
+}
+
+/* Suavizar a subida e imagem dos cards da Frota */
+.card-frota {
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+
+.card-frota:hover .imagem img {
+  transform: scale(1.06);
+}
+
+.imagem {
+  overflow: hidden; /* Garante que a imagem não saia do card no zoom */
+}
+
+.imagem img {
+  transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+/* Botões com efeito de pulso de sombra */
+.btn-orcamento, .hero-btn, .btn-ver-mais, .form-submit-button, .cta-button {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+              box-shadow 0.3s ease, 
+              background-color 0.3s ease, 
+              color 0.3s ease;
+}
+
+.btn-orcamento:hover, .btn-ver-mais:hover, .form-submit-button:hover {
+  box-shadow: 0 8px 20px rgba(12, 122, 53, 0.3);
+}
+
+/* ================= MELHORIA NO MENU MOBILE ================= */
+@media(max-width: 900px) {
+  nav {
+    /* Transição mais suave e natural para o menu lateral */
+    transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    transform: translateX(100%);
+    right: 0; /* fixando a base na direita */
+  }
+
+  nav.active {
+    transform: translateX(0);
+  }
+}
+.orcamento-section {
+      padding: 140px 0 80px;
+      background: #f8f8f5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    
+    .orcamento-central {
+      max-width: 600px;
+      margin: 0 auto;
+      width: 100%;
+      position: relative;
+    }
+
+    .animated-box {
+      background: var(--white);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+      width: 100%;
+      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .animated-box.hide {
+      display: none;
+      opacity: 0;
+      transform: scale(0.95) translateY(10px);
+    }
+
+    .animated-box.fade-in {
+      display: block;
+      animation: surgeBloco 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.15) forwards;
+    }
+
+    @keyframes surgeBloco {
+      from { opacity: 0; transform: scale(0.96) translateY(15px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .resultado-header {
+      text-align: center;
+      border-bottom: 2px solid #f0f0e8;
+      padding-bottom: 20px;
+      margin-bottom: 25px;
+    }
+    .resultado-header i {
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    
+    .btn-voltar-topo {
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      padding: 5px 0;
+      transition: color 0.2s ease, transform 0.2s ease;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .btn-voltar-topo:hover {
+      color: var(--primary);
+      transform: translateX(-3px);
+    }
+
+    .preco-estimado {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: center;
+      margin: 20px 0;
+    }
+    .detalhes-lista {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 30px;
+    }
+    .detalhes-lista li {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid #f5f5f0;
+      font-size: 0.95rem;
+    }
+    .detalhes-lista li strong { color: var(--text-dark); text-align: right; max-width: 60%; }
+    
+    .btn-whatsapp-orcamento {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background-color: #25d366;
+      color: var(--white);
+      padding: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: 0.3s;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
+    }
+    .btn-whatsapp-orcamento:hover {
+      background-color: #1ebd59;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+    }
+    .aviso-estimativa {
+      font-size: 0.8rem;
+      color: #777;
+      text-align: center;
+      margin-top: 20px;
+      line-height: 1.4;
+    }
+    
+    /* Ajustes inputs lado a lado */
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 480px) {
+      .form-row-2 { grid-template-columns: 1fr; gap: 0; }
+    }
