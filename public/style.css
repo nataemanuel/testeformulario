@@ -722,7 +722,7 @@ nav a.btn-orcamento::after {
 /* Centraliza o botão e dá o distanciamento correto dos cards */
 .feedbacks-action {
   text-align: center;
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 /* O botão transparente com a borda utilizando a cor amarela/laranja do seu site */
@@ -741,6 +741,7 @@ nav a.btn-orcamento::after {
   transition: 0.3s ease;
   cursor: pointer;
 }
+
 
 /* Efeito Hover: preenche ao passar o mouse e sobe de leve */
 .btn-ver-mais:hover {
