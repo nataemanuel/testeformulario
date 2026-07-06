@@ -38,15 +38,16 @@ const Mensagem = mongoose.model("Mensagem", mensagemSchema);
 app.post("/contato", async (req, res) => {
     try {
         const novaMensagem = new Mensagem(req.body);
-
         await novaMensagem.save();
 
         res.status(201).json({
             sucesso: true,
             mensagem: "Mensagem enviada!"
         });
-
     } catch (erro) {
+        // ESSA LINHA É CRUCIAL AGORA:
+        console.error("Erro ao salvar mensagem:", erro); 
+
         res.status(500).json({
             sucesso: false
         });
