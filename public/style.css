@@ -694,10 +694,60 @@ nav a.btn-orcamento::after {
   font-weight: bold;
 }
 
+
 /* ================= SEÇÃO FEEDBACKS ================= */
 .feedbacks {
-   padding: 160px 0 100px 0;
+  padding: 135px 0 100px 0;
   background: var(--white);
+  position: relative; /* CRUCIAL: Permite posicionar a imagem de fundo corretamente */
+  z-index: 1;         /* Garante que a seção fique na camada correta */
+}
+
+/* Pseudo-elemento que controlará a imagem de fundo e a transparência */
+.feedbacks::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  /* Substitua pelo caminho correto da sua imagem */
+  background: url('img/feedbacksbg.png') center/cover no-repeat; 
+  
+  opacity: 0.15;      /* Controla a transparência (0.15 é 15% de opacidade, ajuste como preferir) */
+  z-index: -1;        /* Joga a imagem para trás do texto e dos cards */
+}
+
+/* Centraliza o botão e dá o distanciamento correto dos cards */
+.feedbacks-action {
+  text-align: center;
+  margin-top: 50px;
+}
+
+/* O botão transparente com a borda utilizando a cor amarela/laranja do seu site */
+.btn-ver-mais {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: transparent;
+  color: var(--accent); /* Usa a cor #d5a437 já existente no seu root */
+  border: 2px solid var(--accent);
+  padding: 12px 35px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+/* Efeito Hover: preenche ao passar o mouse e sobe de leve */
+.btn-ver-mais:hover {
+  background-color: var(--accent);
+  color: var(--white);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(213, 164, 55, 0.3);
 }
 
 .feedbacks-topo {
@@ -761,7 +811,7 @@ nav a.btn-orcamento::after {
 
 /* ================= CONTATO & FORMULÁRIO ================= */
 .contact-section { 
-  padding: 50px 0; 
+  padding: 80px 0; 
   background-color: var(--white); 
 }
 
