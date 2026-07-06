@@ -44,39 +44,42 @@
     });
     // ================= NAV ATIVA AO ROLAR =================
 
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
+// ================= NAV ATIVA AO ROLAR =================
 
-const observerNav = new IntersectionObserver((entries) => {
+if (window.location.pathname.endsWith("index.html") ||
+    window.location.pathname === "/" ||
+    window.location.pathname.endsWith("/")) {
 
-  entries.forEach(entry => {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll("nav a");
 
-    if (entry.isIntersecting) {
+  const observerNav = new IntersectionObserver((entries) => {
 
-      const id = entry.target.getAttribute("id");
+    entries.forEach(entry => {
 
-      navLinks.forEach(link => {
-        link.classList.remove("active");
+      if (entry.isIntersecting) {
 
-        // INÍCIO
-        if (!id && link.textContent.includes("Início")) {
-          link.classList.add("active");
-        }
+        const id = entry.target.getAttribute("id");
 
-        // OUTRAS SEÇÕES
-        if (id && link.getAttribute("href") === `#${id}`) {
-          link.classList.add("active");
-        }
+        navLinks.forEach(link => {
+          link.classList.remove("active");
 
-      });
+          if (id && link.getAttribute("href") === `#${id}`) {
+            link.classList.add("active");
+          }
+        });
 
-    }
+      }
 
+    });
+
+  }, {
+    threshold: 0.6
   });
 
-}, {
-  threshold: 0.6
-});
+  sections.forEach(section => observerNav.observe(section));
+
+}
 
 // OBSERVA TODAS AS SEÇÕES
 sections.forEach(section => {
