@@ -467,7 +467,8 @@ nav a.btn-orcamento::after {
 }
 
 .servicos-topo h2 {
-  font-size: 52px;
+  font-size:clamp(1.8rem,4vw,2.8rem);
+font-weight:800;
   line-height: 1.1;
   color: #0c7a35;
   margin: 35px 0 25px;
@@ -1109,10 +1110,9 @@ nav a.btn-orcamento::after {
     z-index: 1001;
   }
 
-  nav.active {
-    right: 0;
-  }
-
+  nav.active{
+    z-index: 9999;
+}
   nav a {
     font-size: 1.15rem;
   }
