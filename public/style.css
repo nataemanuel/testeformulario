@@ -481,11 +481,37 @@ font-weight:800;
   line-height: 1.9;
 }
 
-.servicos-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 35px;
+/* ADICIONE ESTE CSS NOVO: */
+
+/* Configura o container do carrossel para permitir ver a beirada do próximo card */
+.servicos-carousel {
+  padding-bottom: 50px !important; /* Espaço para as bolinhas não sobreporem o texto */
+  overflow: visible !important;   /* Permite que o card vizinho "espie" na lateral */
 }
+
+/* Garante que os cards do carrossel fiquem alinhados e com a mesma altura */
+.servico-card {
+  height: auto; 
+  box-sizing: border-box;
+}
+
+/* Estilização das bolinhas indicadoras */
+.servicos-carousel .swiper-pagination-bullet {
+  background: var(--text-light);
+  opacity: 0.4;
+  width: 10px;
+  height: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Estilo da bolinha ativa (amarela/dourada igual ao seu site) */
+.servicos-carousel .swiper-pagination-bullet-active {
+  background: var(--accent) !important; 
+  opacity: 1;
+  width: 25px; /* Deixa a bolinha ativa mais alongada e moderna */
+  border-radius: 5px;
+}
+
 
 .servico-card {
   background: #fff;
