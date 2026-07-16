@@ -1110,9 +1110,9 @@ font-weight:800;
     z-index: 1001;
   }
 
-  nav.active{
-    z-index: 9999;
-}
+   nav.active {
+    right: 0;
+  }
   nav a {
     font-size: 1.15rem;
   }
