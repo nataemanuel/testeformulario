@@ -42,6 +42,44 @@
       });
 
     });
+    
+    document.addEventListener('DOMContentLoaded', function () {
+  const swiperServicos = new Swiper('.servicos-carousel', {
+    // Configurações de responsividade
+    slidesPerView: 1.15, // Mostra 1 card inteiro e 15% do próximo
+    spaceBetween: 20,    // Espaçamento entre os cards
+    centeredSlides: false,
+    grabCursor: true,    // Cursor de "mãozinha" para arrastar no PC
+    
+    // Configuração das bolinhas indicadoras
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+
+    // Ajustes para diferentes tamanhos de tela
+    breakpoints: {
+      // Telas de celulares médios/grandes (acima de 480px)
+      480: {
+        slidesPerView: 1.3, // Mostra um pouco mais do próximo card
+        spaceBetween: 25,
+      },
+      // Tablets (acima de 768px)
+      768: {
+        slidesPerView: 2.2, // Mostra 2 cards inteiros e um pedaço do terceiro
+        spaceBetween: 30,
+      },
+      // Desktops (acima de 1024px)
+      1024: {
+        slidesPerView: 3,   // Em telas grandes, mostra os 3 cards lado a lado normalmente
+        spaceBetween: 35,
+        allowTouchMove: false, // Desativa o arrastar se todos couberem na tela
+      }
+    }
+  });
+});
+
+    
     // ================= NAV ATIVA AO ROLAR =================
 
 const sections = document.querySelectorAll("section");
