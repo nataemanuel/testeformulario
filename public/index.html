@@ -7,6 +7,7 @@
   <title>Manga Transportes | Fretamento Rural e Empresarial em Brasilândia do Sul - PR</title>
   <meta name="description" content="Mais de 10 anos de experiência em fretamento rural, transporte empresarial e excursões no Paraná. Segurança, pontualidade e conforto em cada viagem.">
   <link rel="icon" href="img/logo.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -124,38 +125,45 @@
       </p>
     </div>
 
-    <div class="servicos-container">
-      <div class="servico-card fade">
-        <div class="servico-icone"><i class="fa-solid fa-bus"></i></div>
-        <h3>Fretamento Rural</h3>
-        <p>Transporte seguro para trabalhadores rurais, com rotas organizadas e compromisso com horários.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Rotas personalizadas</li>
-          <li><i class="fa-solid fa-check"></i> Pontualidade garantida</li>
-        </ul>
-      </div>
+    <div class="servicos-carousel swiper">
+      <div class="swiper-wrapper">
+        
+        <div class="servico-card fade swiper-slide">
+          <div class="servico-icone"><i class="fa-solid fa-bus"></i></div>
+          <h3>Fretamento Rural</h3>
+          <p>Transporte seguro para trabalhadores rurais, com rotas organizadas e compromisso com horários.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Rotas personalizadas</li>
+            <li><i class="fa-solid fa-check"></i> Pontualidade garantida</li>
+          </ul>
+        </div>
 
-      <div class="servico-card fade ">
-        <div class="servico-icone"><i class="fa-solid fa-building"></i></div>
-        <h3>Transporte Empresarial</h3>
-        <p>Soluções corporativas completas para empresas que precisam transportar colaboradores com.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Atendimento corporativo</li>
-          <li><i class="fa-solid fa-check"></i> Viagens programadas</li>
-        </ul>
-      </div>
+        <div class="servico-card fade swiper-slide">
+          <div class="servico-icone"><i class="fa-solid fa-building"></i></div>
+          <h3>Transporte Empresarial</h3>
+          <p>Soluções corporativas completas para empresas que precisam transportar colaboradores com.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Atendimento corporativo</li>
+            <li><i class="fa-solid fa-check"></i> Viagens programadas</li>
+          </ul>
+        </div>
 
-      <div class="servico-card fade">
-        <div class="servico-icone"><i class="fa-solid fa-road"></i></div>
-        <h3>Viagens e Excursões</h3>
-        <p>Transporte focado em eventos, turismo e excursões regionais, oferecendo tranquilidade.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Eventos e turismo</li>
-          <li><i class="fa-solid fa-check"></i> Conforto premium</li>
-        </ul>
+        <div class="servico-card fade swiper-slide">
+          <div class="servico-icone"><i class="fa-solid fa-road"></i></div>
+          <h3>Viagens e Excursões</h3>
+          <p>Transporte focado em eventos, turismo e excursões regionais, oferecendo tranquilidade.</p>
+          <ul>
+            <li><i class="fa-solid fa-check"></i> Eventos e turismo</li>
+            <li><i class="fa-solid fa-check"></i> Conforto premium</li>
+          </ul>
+        </div>
+
       </div>
+      
+      <div class="swiper-pagination"></div>
     </div>
   </section>
+
 
   <section class="frota" id="frota">
     <div class="container">
@@ -352,5 +360,6 @@
 
   <div id="toast" class="toast">Mensagem enviada com sucesso!</div>
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 </html>
