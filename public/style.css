@@ -1112,8 +1112,8 @@ nav a.btn-orcamento::after {
   }
   
   .sobre-subtitulo::after {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
   }
   
   .sobre-cards, .visao-box {
