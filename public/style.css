@@ -40,6 +40,26 @@ body {
   padding: 0 20px;
 }
 
+/* ================= ANIMAÇÃO DE ENTRADA (FADE) ================= */
+.fade {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade.visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* ================= HEADER ================= */
 header {
   width: 100%;
@@ -73,9 +93,8 @@ nav {
 
 nav a {
   text-decoration: none;
-
   color: #333;
-  font-weight: 520;
+  font-weight: 600;
   position: relative;
   transition: 0.3s;
   font-size: 1rem;
@@ -467,8 +486,7 @@ nav a.btn-orcamento::after {
 }
 
 .servicos-topo h2 {
-  font-size:clamp(1.8rem,4vw,2.8rem);
-font-weight:800;
+  font-size: 52px;
   line-height: 1.1;
   color: #0c7a35;
   margin: 35px 0 25px;
@@ -481,37 +499,11 @@ font-weight:800;
   line-height: 1.9;
 }
 
-/* ADICIONE ESTE CSS NOVO: */
-
-/* Configura o container do carrossel para permitir ver a beirada do próximo card */
-.servicos-carousel {
-  padding-bottom: 50px !important; /* Espaço para as bolinhas não sobreporem o texto */
-  overflow: visible !important;   /* Permite que o card vizinho "espie" na lateral */
+.servicos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
 }
-
-/* Garante que os cards do carrossel fiquem alinhados e com a mesma altura */
-.servico-card {
-  height: auto; 
-  box-sizing: border-box;
-}
-
-/* Estilização das bolinhas indicadoras */
-.servicos-carousel .swiper-pagination-bullet {
-  background: var(--text-light);
-  opacity: 0.4;
-  width: 10px;
-  height: 10px;
-  transition: all 0.3s ease;
-}
-
-/* Estilo da bolinha ativa (amarela/dourada igual ao seu site) */
-.servicos-carousel .swiper-pagination-bullet-active {
-  background: var(--accent) !important; 
-  opacity: 1;
-  width: 25px; /* Deixa a bolinha ativa mais alongada e moderna */
-  border-radius: 5px;
-}
-
 
 .servico-card {
   background: #fff;
@@ -1136,9 +1128,10 @@ font-weight:800;
     z-index: 1001;
   }
 
-   nav.active {
+  nav.active {
     right: 0;
   }
+
   nav a {
     font-size: 1.15rem;
   }
@@ -1285,4 +1278,126 @@ font-weight:800;
     line-height: 1.6;
   }
 
+}
+
+/* ================= PÁGINA DE ORÇAMENTO ================= */
+.orcamento {
+  padding: 160px 0 100px;
+  background: var(--bg-light);
+  min-height: 100vh;
+}
+
+.orcamento .titulo {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 45px;
+}
+
+.orcamento .titulo h1 {
+  font-size: clamp(2rem, 4vw, 2.6rem);
+  color: var(--primary);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.orcamento .titulo p {
+  color: var(--text-light);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+#formOrcamento {
+  background: var(--white);
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 45px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid #eeeee6;
+}
+
+.orcamento label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: var(--primary);
+  font-size: 0.92rem;
+}
+
+.orcamento .grupo {
+  margin-bottom: 20px;
+}
+
+.orcamento .duplo {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.orcamento .duplo .grupo {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.orcamento input,
+.orcamento select,
+.orcamento textarea {
+  width: 100%;
+  padding: 13px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: var(--white);
+  transition: 0.3s;
+}
+
+.orcamento select {
+  cursor: pointer;
+}
+
+.orcamento input:focus,
+.orcamento select:focus,
+.orcamento textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(213, 164, 55, 0.15);
+}
+
+.orcamento textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.orcamento button[type="submit"] {
+  width: 100%;
+  background: var(--primary);
+  color: var(--white);
+  border: none;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.orcamento button[type="submit"]:hover {
+  background: var(--primary-dark);
+}
+
+@media (max-width: 600px) {
+  .orcamento {
+    padding: 140px 0 70px;
+  }
+
+  #formOrcamento {
+    padding: 30px 22px;
+  }
+
+  .orcamento .duplo {
+    flex-direction: column;
+    gap: 0;
+  }
 }
