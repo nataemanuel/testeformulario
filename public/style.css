@@ -172,7 +172,7 @@ nav a.btn-orcamento::after {
       rgba(245,241,235,.40)),
     url("img/banner.png") center/cover no-repeat;
 
-  filter: blur(4px);
+  filter: blur(2px);
   transform: scale(1.05); /* evita bordas após o blur */
 
   z-index: 0;
