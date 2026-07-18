@@ -525,6 +525,22 @@ nav a.btn-orcamento::after {
   font-size: 18px;
   line-height: 1.9;
 }
+/* Sobrescreve o comportamento antigo para permitir o funcionamento do carrossel */
+.servicos-carousel {
+  width: 100%;
+  padding-bottom: 40px; /* Espaço para as bolinhas de paginação na parte inferior */
+  overflow: hidden;    /* Esconde os cards que saem da tela */
+}
+
+/* Garante que os cards ocupem a altura correta dentro do carrossel */
+.servicos-carousel .servico-card {
+  height: auto;
+}
+
+/* Estilização opcional para deixar as bolinhas com a cor verde da sua identidade */
+.servicos-carousel .swiper-pagination-bullet-active {
+  background: var(--primary);
+}
 
 .servicos-container {
   display: grid;
