@@ -135,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
     formOrcamento.addEventListener("submit", function (e) {
       e.preventDefault();
 
-      // Leitura dos dados do formulário
       const nome = document.getElementById("nome")?.value || "";
       const empresa = document.getElementById("empresa")?.value || "";
       const telefone = document.getElementById("telefone")?.value || "";
@@ -150,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const passageiros = elPassageiros ? parseInt(elPassageiros.value) || 0 : 0;
       const info = document.getElementById("info")?.value || "";
 
-      // Definindo tabela e veiculo sugerido
       let veiculo = "Ônibus Rodoviário";
       let capacidade = 50;
       let precoPorKm = 8.50;
@@ -173,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
         taxaMinima = 500;
       }
 
-      // Cálculo do valor
       let valorCalculado = km * precoPorKm;
       if (valorCalculado < taxaMinima && km > 0) {
         valorCalculado = taxaMinima;
@@ -184,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
         currency: "BRL"
       });
 
-      // Atualiza os dados na tela
       const resVeiculo = document.getElementById("resVeiculo");
       const resKm = document.getElementById("resKm");
       const resCapacidade = document.getElementById("resCapacidade");
@@ -195,14 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (resCapacidade) resCapacidade.innerText = capacidade;
       if (resValor) resValor.innerText = valorFormatado;
 
-      // OCULTA O FORMULÁRIO E EXIBE O RESULTADO SOZINHO
       if (boxFormulario) boxFormulario.style.display = "none";
       if (resBox) {
         resBox.style.display = "block";
         resBox.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      // Link para o WhatsApp
       const numeroWhatsApp = "5544984385432";
       let mensagem = `*Solicitação de Orçamento - Manga Transportes*\n\n`;
       mensagem += `*Nome:* ${nome}\n`;
@@ -224,7 +218,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // AÇÃO DO BOTÃO "VOLTAR AO FORMULÁRIO"
   if (btnVoltarForm) {
     btnVoltarForm.addEventListener("click", function () {
       if (resBox) resBox.style.display = "none";
@@ -234,5 +227,105 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
+
+
+  // ================= 7. MODAL DE FEEDBACK & ENVIO =================
+  const modal = document.getElementById("modalFeedback");
+  const btnAbrirModal = document.getElementById("btnAbrirModalFeedback");
+  const btnFecharModal = document.querySelector(".fechar-modal");
+  const formFeedback = document.getElementById("formFeedback");
+
+  if (btnAbrirModal && modal) {
+    btnAbrirModal.addEventListener("click", (e) => {
+      e.preventDefault();
+      modal.style.display = "block";
+    });
+  }
+
+  if (btnFecharModal && modal) {
+    btnFecharModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+  }
+
+  window.addEventListener("click", (e) => {
+    if (e.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Envio do formulário de feedback para a API
+  if (formFeedback) {
+    formFeedback.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const dados = {
+        nome: document.getElementById("fbNome")?.value || "",
+        cargo: document.getElementById("fbCargo")?.value || "",
+        estrelas: parseInt(document.getElementById("fbEstrelas")?.value) || 5,
+        mensagem: document.getElementById("fbMensagem")?.value || ""
+      };
+
+      try {
+        const resposta = await fetch("/feedbacks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+
+        if (resposta.ok) {
+          alert("Obrigado! Seu feedback foi recebido e aguarda aprovação da administração.");
+          formFeedback.reset();
+          if (modal) modal.style.display = "none";
+        } else {
+          alert("Erro ao enviar o feedback. Tente novamente.");
+        }
+      } catch (erro) {
+        console.error("Erro na requisição de feedback:", erro);
+      }
+    });
+  }
+
+
+  // ================= 8. EXIBIR FEEDBACKS APROVADOS =================
+  async function carregarFeedbacksAprovados() {
+    const grid = document.querySelector(".feedbacks-grid");
+    if (!grid) return;
+
+    try {
+      const resposta = await fetch("/feedbacks/aprovados");
+      const feedbacks = await resposta.json();
+
+      if (!Array.isArray(feedbacks) || feedbacks.length === 0) {
+        grid.innerHTML = "<p style='text-align:center; width:100%;'>Nenhum depoimento publicado ainda.</p>";
+        return;
+      }
+
+      grid.innerHTML = "";
+
+      const ehPaginaFeedbacks = window.location.pathname.includes("feedbacks.html");
+      const listaExibida = ehPaginaFeedbacks ? feedbacks : feedbacks.slice(0, 3);
+
+      listaExibida.forEach(fb => {
+        const qtdEstrelas = fb.estrelas || 5;
+        const estrelasHtml = '<i class="fa-solid fa-star"></i>'.repeat(qtdEstrelas);
+
+        grid.innerHTML += `
+          <div class="card-feedback">
+            <div class="feedback-estrelas">${estrelasHtml}</div>
+            <p>"${fb.mensagem}"</p>
+            <div class="feedback-usuario">
+              <h4>${fb.nome}</h4>
+              <span>${fb.cargo}</span>
+            </div>
+          </div>
+        `;
+      });
+    } catch (erro) {
+      console.error("Erro ao carregar feedbacks:", erro);
+    }
+  }
+
+  carregarFeedbacksAprovados();
 
 });
