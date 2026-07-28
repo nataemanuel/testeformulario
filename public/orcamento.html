@@ -39,70 +39,98 @@
   <section class="orcamento">
     <div class="container">
 
-      <div class="titulo">
-        <h1>Solicite seu Orçamento</h1>
-        <p>Preencha o formulário abaixo e nossa equipe entrará em contato o mais rápido possível.</p>
+      <div id="boxFormulario">
+        <div class="titulo">
+          <h1>Solicite seu Orçamento</h1>
+          <p>Preencha os dados da viagem abaixo para calcular a estimativa e recomendar o veículo ideal.</p>
+        </div>
+
+        <form id="formOrcamento">
+
+          <div class="grupo">
+            <label for="nome">Seu nome</label>
+            <input type="text" id="nome" placeholder="Digite seu nome completo" required>
+          </div>
+
+          <div class="grupo">
+            <label for="empresa">Empresa (Opcional)</label>
+            <input type="text" id="empresa" placeholder="Nome da empresa">
+          </div>
+
+          <div class="duplo">
+            <div class="grupo">
+              <label for="telefone">Telefone (WhatsApp)</label>
+              <input type="tel" id="telefone" placeholder="(44) 90000-0000" required>
+            </div>
+
+            <div class="grupo">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" placeholder="seuemail@email.com" required>
+            </div>
+          </div>
+
+          <div class="duplo">
+            <div class="grupo">
+              <label for="origem">Cidade de Origem</label>
+              <input type="text" id="origem" placeholder="Cidade de origem" required>
+            </div>
+
+            <div class="grupo">
+              <label for="destino">Cidade de Destino</label>
+              <input type="text" id="destino" placeholder="Cidade de destino" required>
+            </div>
+          </div>
+
+          <div class="duplo">
+            <div class="grupo">
+              <label for="kmTotal">Distância Total (Ida e Volta em KM)</label>
+              <input type="number" id="kmTotal" min="1" placeholder="Ex: 250" required>
+            </div>
+
+            <div class="grupo">
+              <label for="qtdPassageiros">Quantidade de Passageiros</label>
+              <input type="number" id="qtdPassageiros" min="1" max="60" placeholder="Ex: 18" required>
+            </div>
+          </div>
+
+          <div class="grupo">
+            <label for="info">Informações Adicionais</label>
+            <textarea id="info" placeholder="Conte mais detalhes sobre a viagem (datas, horários, etc.)"></textarea>
+          </div>
+
+          <button type="submit">
+            Calcular e Solicitar Orçamento
+          </button>
+
+        </form>
       </div>
 
-      <form id="formOrcamento">
-
-        <div class="grupo">
-          <label for="nome">Seu nome</label>
-          <input type="text" id="nome" placeholder="Digite seu nome completo" required>
-        </div>
-
-        <div class="grupo">
-          <label for="empresa">Empresa (Opcional)</label>
-          <input type="text" id="empresa" placeholder="Nome da empresa">
-        </div>
-
-        <div class="duplo">
-          <div class="grupo">
-            <label for="telefone">Telefone</label>
-            <input type="tel" id="telefone" placeholder="(44) 90000-0000" required>
-          </div>
-
-          <div class="grupo">
-            <label for="email">E-mail</label>
-            <input type="email" id="email" placeholder="seuemail@email.com" required>
-          </div>
-        </div>
-
-        <div class="duplo">
-          <div class="grupo">
-            <label for="origem">Cidade de Origem</label>
-            <input type="text" id="origem" placeholder="Cidade de origem" required>
-          </div>
-
-          <div class="grupo">
-            <label for="destino">Cidade de Destino</label>
-            <input type="text" id="destino" placeholder="Cidade de destino" required>
-          </div>
-        </div>
-
-        <div class="grupo">
-          <label for="tipoCarga">Quantidade de passageiros </label>
-          <select id="tipoCarga" required>
-            <option value="">Selecione uma opção</option>
-            <option>5-10</option>
-            <option>10-15</option>
-            <option>15-20</option>
-            <option>20-25</option>
-            <option>25-30</option>
-             <option>+30</option>
-          </select>
-        </div>
-
-        <div class="grupo">
-          <label for="info">Informações Adicionais</label>
-          <textarea id="info" placeholder="Conte mais detalhes sobre o transporte que você precisa"></textarea>
-        </div>
-
-        <button type="submit">
-          Solicitar Orçamento
+      <div id="resultadoOrcamento" class="resultado-box" style="display: none;">
+        
+        <button type="button" id="btnVoltarForm" class="btn-voltar">
+          <i class="fas fa-arrow-left"></i> Voltar ao Formulário
         </button>
 
-      </form>
+        <h3><i class="fas fa-calculator"></i> Estimativa do Seu Orçamento</h3>
+        
+        <div class="resultado-detalhes">
+          <p><strong>Veículo Recomendado:</strong> <span id="resVeiculo"></span></p>
+          <p><strong>Distância Informada:</strong> <span id="resKm"></span> KM</p>
+          <p><strong>Capacidade do Veículo:</strong> até <span id="resCapacidade"></span> passageiros</p>
+          <hr>
+          <div class="preco-estimado">
+            <span>Valor Estimado:</span>
+            <strong id="resValor">R$ 0,00</strong>
+          </div>
+          <small>* Valor estimado inicial. Taxas adicionais (como pedágio) podem se aplicar.</small>
+        </div>
+
+        <div class="resultado-acoes">
+          <a id="btnEnviarWhatsApp" target="_blank" class="btn-whatsapp">
+            <i class="fab fa-whatsapp"></i> Confirmar e Enviar via WhatsApp
+          </a>
+        </div>
+      </div>
 
     </div>
   </section>
