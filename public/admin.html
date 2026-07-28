@@ -2,27 +2,88 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Admin - Mensagens</title>
+  <title>Admin - Painel de Controle</title>
   <link rel="stylesheet" href="style2.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css"> </head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
+  <style>
+    .admin-container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 40px auto 60px;
+    }
+    .grid-admin {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    .secao-titulo {
+      color: #0c7a35;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #d5a437;
+    }
+    .btn-aprovar {
+      background: #0c7a35;
+      color: #ffffff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn-aprovar:hover {
+      background: #085625;
+    }
+    .status-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .status-pendente {
+      background: #fff3cd;
+      color: #856404;
+    }
+    .status-aprovado {
+      background: #d4edda;
+      color: #155724;
+    }
+  </style>
+</head>
 <body>
 
-  <h1>Mensagens Recebidas</h1>
+  <h1>Painel Administrativo</h1>
 
-  <div id="listaMensagens"></div>
-<footer class="footer">
-  <p>
-    © 2026 Todos os direitos reservados.
-    Desenvolvido por
-    <a href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener noreferrer">
-      Natã Emanuel
-    </a>
-  </p>
-</footer>
+  <div class="admin-container">
+    
+    <h2 class="secao-titulo">Feedbacks dos Clientes</h2>
+    <div id="listaFeedbacksAdmin" class="grid-admin"></div>
+
+    <h2 class="secao-titulo">Mensagens Recebidas</h2>
+    <div id="listaMensagens" class="grid-admin"></div>
+
+  </div>
+
+  <footer class="footer">
+    <p>
+      © 2026 Todos os direitos reservados.
+      Desenvolvido por
+      <a href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener noreferrer">
+        Natã Emanuel
+      </a>
+    </p>
+  </footer>
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
+    // 1. FORMATAR DATA
     function formatarData(dataString) {
       if (!dataString) return "Data desconhecida";
       const data = new Date(dataString);
@@ -35,33 +96,136 @@
       });
     }
 
-    async function carregarMensagens() {
-      const resposta = await fetch("/mensagens");
-      const mensagens = await resposta.json();
-      const lista = document.getElementById("listaMensagens");
-      
-      lista.innerHTML = "";
+    // 2. CARREGAR FEEDBACKS DO BANCO DE DADOS
+    async function carregarFeedbacksAdmin() {
+      try {
+        const res = await fetch("/admin/feedbacks");
+        const feedbacks = await res.json();
+        const container = document.getElementById("listaFeedbacksAdmin");
 
-      mensagens.forEach(msg => {
-      const dataFormatada = formatarData(msg.data);
+        if (!container) return;
+        container.innerHTML = "";
 
-        lista.innerHTML += `
-          <div class="card-mensagem">
-            <div class="card-header">
-              <h3>${msg.nome}</h3>
-              <span class="card-date">${dataFormatada}</span>
+        if (!Array.isArray(feedbacks) || feedbacks.length === 0) {
+          container.innerHTML = "<p>Nenhum feedback recebido até o momento.</p>";
+          return;
+        }
+
+        feedbacks.forEach(fb => {
+          const aprovado = fb.status === 'aprovado';
+          const qtdEstrelas = fb.estrelas || 5;
+          const estrelasHtml = '★'.repeat(qtdEstrelas);
+
+          container.innerHTML += `
+            <div class="card-mensagem ${aprovado ? 'card-aprovado' : ''}">
+              <div class="card-header">
+                <h3>${fb.nome} <small style="font-size: 0.85rem; color: #666;">(${fb.cargo})</small></h3>
+                <span style="color: #d5a437; font-size: 1.2rem;">${estrelasHtml}</span>
+              </div>
+              <p style="margin-top: 10px;">"${fb.mensagem}"</p>
+              
+              <div>
+                <span class="status-badge ${aprovado ? 'status-aprovado' : 'status-pendente'}">
+                  ${fb.status ? fb.status.toUpperCase() : 'PENDENTE'}
+                </span>
+              </div>
+
+              <div style="margin-top: 18px; display: flex; gap: 10px; align-items: center;">
+                ${!aprovado ? `
+                  <button class="btn-aprovar" onclick="aprovarFeedback('${fb._id}')">
+                    Aprovar / Publicar
+                  </button>
+                ` : '<span style="color: #0c7a35; font-weight: bold;">✓ Publicado no site</span>'}
+
+                <button class="btn-apagar" onclick="excluirFeedback('${fb._id}')">
+                  Excluir
+                </button>
+              </div>
             </div>
-            <p class="card-email"><strong>E-mail:</strong> ${msg.email}</p>
-            <p>${msg.mensagem}</p>
-            <button class="btn-apagar" onclick="apagarMensagem('${msg._id}')">
-              Apagar
-            </button>
-          </div>
-        `;
+          `;
+        });
+      } catch (err) {
+        console.error("Erro ao carregar feedbacks:", err);
+      }
+    }
+
+    // 3. APROVAR FEEDBACK
+    async function aprovarFeedback(id) {
+      try {
+        const res = await fetch(`/admin/feedbacks/${id}/aprovar`, { method: "PUT" });
+        if (res.ok) {
+          Swal.fire({
+            title: "Publicado!",
+            text: "O feedback agora está visível no site.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false
+          });
+          carregarFeedbacksAdmin();
+        }
+      } catch (err) {
+        console.error("Erro ao aprovar feedback:", err);
+      }
+    }
+
+    // 4. EXCLUIR FEEDBACK
+    function excluirFeedback(id) {
+      Swal.fire({
+        title: "Excluir Feedback?",
+        text: "Essa ação não poderá ser desfeita.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Sim, excluir",
+        cancelButtonText: "Cancelar"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await fetch(`/admin/feedbacks/${id}`, { method: "DELETE" });
+          carregarFeedbacksAdmin();
+          Swal.fire("Excluído!", "O feedback foi removido.", "success");
+        }
       });
     }
 
-    // 3. Modificamos a função para usar o SweetAlert2 moderno
+    // 5. CARREGAR MENSAGENS DE CONTATO
+    async function carregarMensagens() {
+      try {
+        const resposta = await fetch("/mensagens");
+        const mensagens = await resposta.json();
+        const lista = document.getElementById("listaMensagens");
+
+        if (!lista) return;
+        lista.innerHTML = "";
+
+        if (!Array.isArray(mensagens) || mensagens.length === 0) {
+          lista.innerHTML = "<p>Nenhuma mensagem recebida.</p>";
+          return;
+        }
+
+        mensagens.forEach(msg => {
+          const dataFormatada = formatarData(msg.data);
+
+          lista.innerHTML += `
+            <div class="card-mensagem">
+              <div class="card-header">
+                <h3>${msg.nome}</h3>
+                <span class="card-date">${dataFormatada}</span>
+              </div>
+              <p class="card-email"><strong>E-mail:</strong> ${msg.email}</p>
+              <p>${msg.mensagem}</p>
+              <button class="btn-apagar" onclick="apagarMensagem('${msg._id}')">
+                Apagar
+              </button>
+            </div>
+          `;
+        });
+      } catch (err) {
+        console.error("Erro ao carregar mensagens:", err);
+      }
+    }
+
+    // 6. APAGAR MENSAGEM DE CONTATO
     function apagarMensagem(id) {
       Swal.fire({
         title: "Tem certeza?",
@@ -71,22 +235,11 @@
         confirmButtonColor: "#d33",
         cancelButtonColor: "#3085d6",
         confirmButtonText: "Sim, apagar!",
-        cancelButtonText: "Cancelar",
-        background: '#1e1e1e', // Cor de fundo combinando com temas escuros (mude se seu site for claro)
-        color: '#fff'
+        cancelButtonText: "Cancelar"
       }).then(async (result) => {
-        // Se o usuário clicou em "Sim, apagar!"
         if (result.isConfirmed) {
-          
-          // Faz a exclusão
-          await fetch(`/mensagens/${id}`, {
-            method: "DELETE"
-          });
-          
-          // Recarrega a lista
+          await fetch(`/mensagens/${id}`, { method: "DELETE" });
           carregarMensagens();
-
-          // Mostra uma confirmação bonita de sucesso
           Swal.fire({
             title: "Apagado!",
             text: "A mensagem foi removida com sucesso.",
@@ -98,7 +251,11 @@
       });
     }
 
-    carregarMensagens();
+    // INITIALIZAÇÃO AO CARREGAR A PÁGINA
+    document.addEventListener("DOMContentLoaded", () => {
+      carregarFeedbacksAdmin();
+      carregarMensagens();
+    });
   </script>
 </body>
 </html>
