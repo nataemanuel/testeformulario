@@ -1400,7 +1400,59 @@ nav a.btn-orcamento::after {
 
 }
 
+/* ================= RESPONSIVIDADE RODAPÉ E CELULARES ================= */
+
+@media (max-width: 900px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+  }
+}
+
 @media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-moderno h4 {
+    display: inline-block;
+  }
+
+  .footer-logo-img {
+    width: 60%;
+  }
+
+  .contato-item {
+    justify-content: flex-start;
+  }
+
+  .footer-copyright {
+    padding: 20px;
+    line-height: 1.6;
+  }
+
+  .orcamento {
+    padding: 140px 0 70px;
+  }
+
+  #formOrcamento {
+    padding: 30px 22px;
+  }
+
+  .orcamento .duplo {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .toast {
+    padding: 16px 24px;
+    font-size: 1rem;
+    border-radius: 14px;
+  }
+}
+
+/* ================= MODAL DE FEEDBACK (DESKTOP E MOBILE) ================= */
+
 .modal {
   display: none; /* Manipulado via JS */
   position: fixed;
@@ -1410,18 +1462,14 @@ nav a.btn-orcamento::after {
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
-  z-index: 99999; /* Garante que fique acima do footer e de tudo */
+  z-index: 99999;
   overflow-y: auto;
   padding: 20px;
-  
-  /* Centraliza a caixa no meio da tela no Desktop */
-  align-items: center;
-  justify-content: center;
 }
 
 .modal-content {
   background-color: var(--white);
-  margin: auto;
+  margin: 50px auto;
   padding: 30px;
   border-radius: var(--radius-md);
   width: 100%;
@@ -1484,29 +1532,8 @@ nav a.btn-orcamento::after {
   margin-top: 20px;
 }
 
-  .footer-grid {
-    grid-template-columns: 1fr;
-    
-  }
 
-  .footer-moderno h4 {
-    display: inline-block;
-  }
 
-  .footer-logo-img {
-  width: 60%;
-  }
-
-  .contato-item {
-    justify-content: center;
-  }
-
-  .footer-copyright {
-    padding: 20px;
-    line-height: 1.6;
-  }
-
-}
 
 /* ================= PÁGINA DE ORÇAMENTO ================= */
 .orcamento {
