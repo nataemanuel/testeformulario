@@ -1,16 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // ANIMAÇÃO
+
+  // ================= 1. ANIMAÇÕES =================
   const elements = document.querySelectorAll('.fade');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visivel'); // corrigido: era 'visible', CSS espera 'visivel'
+        entry.target.classList.add('visivel');
       }
     });
   }, { threshold: 0.2 });
   elements.forEach(el => observer.observe(el));
 
-  // MENU HAMBURGUER
+
+  // ================= 2. MENU HAMBÚRGUER =================
   const menuToggle = document.getElementById('menu-toggle');
   const nav = document.getElementById('nav');
   if (menuToggle && nav) {
@@ -26,104 +28,93 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-});
 
-document.addEventListener('DOMContentLoaded', function () {
+
+  // ================= 3. CARROSSEL SWIPER (SERVIÇOS) =================
   const carouselEl = document.querySelector('.servicos-carousel');
   if (carouselEl && typeof Swiper !== 'undefined') {
-    const swiperServicos = new Swiper('.servicos-carousel', {
-      // Configurações de responsividade
-      slidesPerView: 1.15, // Mostra 1 card inteiro e 15% do próximo
-      spaceBetween: 20,    // Espaçamento entre os cards
-      centeredSlides: false,
-      grabCursor: true,    // Cursor de "mãozinha" para arrastar no PC
-
-      // Configuração das bolinhas indicadoras
+    new Swiper('.servicos-carousel', {
+      slidesPerView: 1.12,
+      spaceBetween: 18,
+      centeredSlides: true,
+      grabCursor: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
       },
-      // Ajustes para diferentes tamanhos de tela
       breakpoints: {
-        // Telas de celulares médios/grandes (acima de 480px)
         480: {
-          slidesPerView: 1.3, // Mostra um pouco mais do próximo card
-          spaceBetween: 25,
+          slidesPerView: 1.15,
+          spaceBetween: 22,
+          centeredSlides: true,
         },
-        // Tablets (acima de 768px)
         768: {
-          slidesPerView: 2.2, // Mostra 2 cards inteiros e um pedaço do terceiro
+          slidesPerView: 2.2,
           spaceBetween: 30,
+          centeredSlides: false,
         },
-        // Desktops (acima de 1024px)
         1024: {
-          slidesPerView: 3,   // Em telas grandes, mostra os 3 cards lado a lado normalmente
+          slidesPerView: 3,
           spaceBetween: 35,
-          allowTouchMove: false, // Desativa o arrastar se todos couberem na tela
+          centeredSlides: false,
+          allowTouchMove: false,
         }
       }
     });
   }
-});
 
-// ================= NAV ATIVA AO ROLAR =================
-document.addEventListener('DOMContentLoaded', () => {
+
+  // ================= 4. NAV ATIVA AO ROLAR =================
   const sections = document.querySelectorAll("section");
   const navLinks = document.querySelectorAll("nav a");
-  const observerNav = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute("id");
-        navLinks.forEach(link => {
-          link.classList.remove("active");
-          // INÍCIO
-          if (!id && link.textContent.includes("Início")) {
-            link.classList.add("active");
-          }
-          // OUTRAS SEÇÕES
-          if (id && link.getAttribute("href") === `#${id}`) {
-            link.classList.add("active");
-          }
-        });
-      }
-    });
-  }, {
-    threshold: 0.6
-  });
-  // OBSERVA TODAS AS SEÇÕES
-  sections.forEach(section => {
-    observerNav.observe(section);
-  });
+  if (sections.length > 0) {
+    const observerNav = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute("id");
+          navLinks.forEach(link => {
+            link.classList.remove("active");
+            if (!id && link.textContent.includes("Início")) {
+              link.classList.add("active");
+            }
+            if (id && link.getAttribute("href") === `#${id}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+      });
+    }, { threshold: 0.6 });
 
-  // ================= FORMULÁRIO DE CONTATO (index.html) =================
-  const form = document.getElementById("formContato");
+    sections.forEach(section => observerNav.observe(section));
+  }
+
+
+  // ================= 5. FORMULÁRIO DE CONTATO (index.html) =================
+  const formContato = document.getElementById("formContato");
   const toast = document.getElementById("toast");
-  if (form) {
-    form.addEventListener("submit", async (e) => {
+
+  if (formContato) {
+    formContato.addEventListener("submit", async (e) => {
       e.preventDefault();
       const dados = {
-        nome: document.getElementById("nome").value,
-        email: document.getElementById("email").value,
-        mensagem: document.getElementById("mensagem").value
+        nome: document.getElementById("nome")?.value || "",
+        email: document.getElementById("email")?.value || "",
+        mensagem: document.getElementById("mensagem")?.value || ""
       };
+
       try {
         const resposta = await fetch("/contato", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(dados)
         });
+
         if (resposta.ok) {
-          // Mostra a notificação bonita no rodapé
           if (toast) {
             toast.classList.add("show");
-            // Esconde o toast depois de 3 segundos (3000ms)
-            setTimeout(() => {
-              toast.classList.remove("show");
-            }, 3000);
+            setTimeout(() => toast.classList.remove("show"), 3000);
           }
-          form.reset();
+          formContato.reset();
         } else {
           alert("Erro ao enviar a mensagem. Tente novamente.");
         }
@@ -133,44 +124,115 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // ================= FORMULÁRIO DE ORÇAMENTO (orcamento.html) =================
+
+  // ================= 6. CÁLCULO DE ORÇAMENTO (orcamento.html) =================
   const formOrcamento = document.getElementById("formOrcamento");
-  const toastOrcamento = document.getElementById("toast");
+  const boxFormulario = document.getElementById("boxFormulario") || formOrcamento;
+  const resBox = document.getElementById("resultadoOrcamento");
+  const btnVoltarForm = document.getElementById("btnVoltarForm");
+
   if (formOrcamento) {
-    formOrcamento.addEventListener("submit", async (e) => {
+    formOrcamento.addEventListener("submit", function (e) {
       e.preventDefault();
-      const dados = {
-        nome: document.getElementById("nome").value,
-        empresa: document.getElementById("empresa") ? document.getElementById("empresa").value : "",
-        telefone: document.getElementById("telefone").value,
-        email: document.getElementById("email").value,
-        origem: document.getElementById("origem").value,
-        destino: document.getElementById("destino").value,
-        passageiros: document.getElementById("tipoCarga").value,
-        info: document.getElementById("info").value
-      };
-      try {
-        const resposta = await fetch("/orcamento", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(dados)
-        });
-        if (resposta.ok) {
-          if (toastOrcamento) {
-            toastOrcamento.classList.add("show");
-            setTimeout(() => {
-              toastOrcamento.classList.remove("show");
-            }, 3000);
-          }
-          formOrcamento.reset();
-        } else {
-          alert("Erro ao enviar o orçamento. Tente novamente.");
-        }
-      } catch (erro) {
-        console.error("Erro na requisição:", erro);
+
+      // Leitura dos dados do formulário
+      const nome = document.getElementById("nome")?.value || "";
+      const empresa = document.getElementById("empresa")?.value || "";
+      const telefone = document.getElementById("telefone")?.value || "";
+      const email = document.getElementById("email")?.value || "";
+      const origem = document.getElementById("origem")?.value || "";
+      const destino = document.getElementById("destino")?.value || "";
+
+      const elKm = document.getElementById("kmTotal");
+      const elPassageiros = document.getElementById("qtdPassageiros");
+
+      const km = elKm ? parseFloat(elKm.value) || 0 : 0;
+      const passageiros = elPassageiros ? parseInt(elPassageiros.value) || 0 : 0;
+      const info = document.getElementById("info")?.value || "";
+
+      // Definindo tabela e veiculo sugerido
+      let veiculo = "Ônibus Rodoviário";
+      let capacidade = 50;
+      let precoPorKm = 8.50;
+      let taxaMinima = 700;
+
+      if (passageiros <= 6) {
+        veiculo = "Minivan Executiva";
+        capacidade = 6;
+        precoPorKm = 3.50;
+        taxaMinima = 250;
+      } else if (passageiros <= 15) {
+        veiculo = "Van Executiva";
+        capacidade = 15;
+        precoPorKm = 4.80;
+        taxaMinima = 350;
+      } else if (passageiros <= 30) {
+        veiculo = "Micro-ônibus";
+        capacidade = 30;
+        precoPorKm = 6.50;
+        taxaMinima = 500;
+      }
+
+      // Cálculo do valor
+      let valorCalculado = km * precoPorKm;
+      if (valorCalculado < taxaMinima && km > 0) {
+        valorCalculado = taxaMinima;
+      }
+
+      const valorFormatado = valorCalculado.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+      });
+
+      // Atualiza os dados na tela
+      const resVeiculo = document.getElementById("resVeiculo");
+      const resKm = document.getElementById("resKm");
+      const resCapacidade = document.getElementById("resCapacidade");
+      const resValor = document.getElementById("resValor");
+
+      if (resVeiculo) resVeiculo.innerText = veiculo;
+      if (resKm) resKm.innerText = km;
+      if (resCapacidade) resCapacidade.innerText = capacidade;
+      if (resValor) resValor.innerText = valorFormatado;
+
+      // OCULTA O FORMULÁRIO E EXIBE O RESULTADO SOZINHO
+      if (boxFormulario) boxFormulario.style.display = "none";
+      if (resBox) {
+        resBox.style.display = "block";
+        resBox.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      // Link para o WhatsApp
+      const numeroWhatsApp = "5544984385432";
+      let mensagem = `*Solicitação de Orçamento - Manga Transportes*\n\n`;
+      mensagem += `*Nome:* ${nome}\n`;
+      if (empresa) mensagem += `*Empresa:* ${empresa}\n`;
+      mensagem += `*Telefone:* ${telefone}\n`;
+      mensagem += `*E-mail:* ${email}\n`;
+      mensagem += `*Origem:* ${origem}\n`;
+      mensagem += `*Destino:* ${destino}\n`;
+      mensagem += `*Distância Total:* ${km} KM\n`;
+      mensagem += `*Passageiros:* ${passageiros}\n`;
+      mensagem += `*Veículo Recomendado:* ${veiculo}\n`;
+      mensagem += `*Estimativa Inicial:* ${valorFormatado}\n`;
+      if (info) mensagem += `*Observações:* ${info}\n`;
+
+      const btnWhatsapp = document.getElementById("btnEnviarWhatsApp");
+      if (btnWhatsapp) {
+        btnWhatsapp.href = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
       }
     });
   }
+
+  // AÇÃO DO BOTÃO "VOLTAR AO FORMULÁRIO"
+  if (btnVoltarForm) {
+    btnVoltarForm.addEventListener("click", function () {
+      if (resBox) resBox.style.display = "none";
+      if (boxFormulario) {
+        boxFormulario.style.display = "block";
+        boxFormulario.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
 });
