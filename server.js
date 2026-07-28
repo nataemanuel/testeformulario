@@ -1,191 +1,278 @@
-document.addEventListener('DOMContentLoaded', () => {
-
-  // ================= 1. ANIMAÇÕES =================
-  const elements = document.querySelectorAll('.fade');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visivel');
-      }
-    });
-  }, { threshold: 0.2 });
-  elements.forEach(el => observer.observe(el));
+const dns = require("dns");
 
 
-  // ================= 2. MENU HAMBÚRGUER =================
-  const menuToggle = document.getElementById('menu-toggle');
-  const nav = document.getElementById('nav');
-  if (menuToggle && nav) {
-    menuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
-      const icon = menuToggle.querySelector('i');
-      if (nav.classList.contains('active')) {
-        icon.classList.remove('fa-bars');
-        icon.classList.add('fa-xmark');
-      } else {
-        icon.classList.remove('fa-xmark');
-        icon.classList.add('fa-bars');
-      }
-    });
-  }
+
+dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 
-  // ================= 3. CARROSSEL SWIPER =================
-  const carouselEl = document.querySelector('.servicos-carousel');
-  if (carouselEl && typeof Swiper !== 'undefined') {
-    new Swiper('.servicos-carousel', {
-      slidesPerView: 1.12,
-      spaceBetween: 18,
-      centeredSlides: true,
-      grabCursor: true,
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-      },
-      breakpoints: {
-        480: { slidesPerView: 1.15, spaceBetween: 22, centeredSlides: true },
-        768: { slidesPerView: 2.2, spaceBetween: 30, centeredSlides: false },
-        1024: { slidesPerView: 3, spaceBetween: 35, centeredSlides: false, allowTouchMove: false }
-      }
-    });
-  }
+
+const express = require("express");
+
+const mongoose = require("mongoose");
+
+const cors = require("cors");
+
+require("dotenv").config();
 
 
-  // ================= 4. FORMULÁRIO DE CONTATO =================
-  const formContato = document.getElementById("formContato");
-  const toast = document.getElementById("toast");
-
-  if (formContato) {
-    formContato.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const dados = {
-        nome: document.getElementById("nome")?.value || "",
-        email: document.getElementById("email")?.value || "",
-        mensagem: document.getElementById("mensagem")?.value || ""
-      };
-
-      try {
-        const resposta = await fetch("/contato", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dados)
-        });
-
-        if (resposta.ok) {
-          if (toast) {
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3000);
-          }
-          formContato.reset();
-        } else {
-          alert("Erro ao enviar a mensagem. Tente novamente.");
-        }
-      } catch (erro) {
-        console.error("Erro na requisição:", erro);
-      }
-    });
-  }
 
 
-  // ================= 5. MODAL & ENVIO DE FEEDBACK =================
-  const modal = document.getElementById("modalFeedback");
-  const btnAbrirModal = document.getElementById("btnAbrirModalFeedback");
-  const btnFecharModal = document.querySelector(".fechar-modal");
-  const formFeedback = document.getElementById("formFeedback");
 
-  if (btnAbrirModal && modal) {
-    btnAbrirModal.addEventListener("click", (e) => {
-      e.preventDefault();
-      modal.style.display = "block";
-    });
-  }
-
-  if (btnFecharModal && modal) {
-    btnFecharModal.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-  }
-
-  window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.style.display = "none";
-    }
-  });
-
-  // Envio do formulário de feedback para o backend
-  if (formFeedback) {
-    formFeedback.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      const dados = {
-        nome: document.getElementById("fbNome").value,
-        cargo: document.getElementById("fbCargo").value,
-        estrelas: parseInt(document.getElementById("fbEstrelas").value),
-        mensagem: document.getElementById("fbMensagem").value
-      };
-
-      try {
-        const res = await fetch("/feedbacks", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(dados)
-        });
-
-        if (res.ok) {
-          alert("Obrigado! Seu feedback foi enviado para análise e será publicado em breve.");
-          formFeedback.reset();
-          if (modal) modal.style.display = "none";
-        } else {
-          alert("Erro ao enviar o feedback.");
-        }
-      } catch (err) {
-        console.error("Erro ao enviar feedback:", err);
-      }
-    });
-  }
+const app = express();
 
 
-  // ================= 6. CARREGAR FEEDBACKS APROVADOS NA TELA =================
-  async function carregarFeedbacksAprovados() {
-    const grid = document.querySelector(".feedbacks-grid");
-    if (!grid) return;
 
-    try {
-      const res = await fetch("/feedbacks/aprovados");
-      const feedbacks = await res.json();
+app.use(cors());
 
-      if (feedbacks.length === 0) {
-        grid.innerHTML = "<p style='text-align:center; width:100%;'>Nenhum depoimento publicado ainda.</p>";
-        return;
-      }
+app.use(express.json());
 
-      grid.innerHTML = "";
+app.use(express.static("public"));
 
-      // Limita a 3 na index.html. Exibe todos se for feedbacks.html
-      const ehPaginaFeedbacks = window.location.pathname.includes("feedbacks.html");
-      const feedbacksExibidos = ehPaginaFeedbacks ? feedbacks : feedbacks.slice(0, 3);
 
-      feedbacksExibidos.forEach(fb => {
-        const quantidadeEstrelas = fb.estrelas || 5;
-        let estrelasHtml = '<i class="fa-solid fa-star"></i>'.repeat(quantidadeEstrelas);
 
-        grid.innerHTML += `
-          <div class="card-feedback">
-            <div class="feedback-estrelas">${estrelasHtml}</div>
-            <p>"${fb.mensagem}"</p>
-            <div class="feedback-usuario">
-              <h4>${fb.nome}</h4>
-              <span>${fb.cargo}</span>
-            </div>
-          </div>
-        `;
-      });
-    } catch (err) {
-      console.error("Erro ao carregar feedbacks:", err);
-    }
-  }
+mongoose.connect(process.env.MONGO_URI)
 
-  // Executa a busca dos feedbacks aprovados
-  carregarFeedbacksAprovados();
+    .then(() => console.log("MongoDB conectado"))
+
+    .catch(err => {
+
+  console.error("Erro MongoDB:");
+
+  console.error(err);
 
 });
+
+
+
+const mensagemSchema = new mongoose.Schema({
+
+    nome: String,
+
+    email: String,
+
+    mensagem: String,
+
+    data: {
+
+        type: Date,
+
+        default: Date.now
+
+    }
+
+});
+
+
+
+const Mensagem = mongoose.model("Mensagem", mensagemSchema);
+
+
+
+// Modelo MongoDB (Exemplo Mongoose)
+
+const feedbackSchema = new mongoose.Schema({
+
+  nome: String,
+
+  cargo: String,
+
+  estrelas: Number,
+
+  mensagem: String,
+
+  status: { type: String, default: 'pendente' }, // 'pendente' ou 'aprovado'
+
+  data: { type: Date, default: Date.now }
+
+});
+
+const Feedback = mongoose.model('Feedback', feedbackSchema);
+
+
+
+// 1. Enviar Feedback (Público)
+
+app.post('/feedbacks', async (req, res) => {
+
+  try {
+
+    const novoFeedback = new Feedback(req.body);
+
+    await novoFeedback.save();
+
+    res.status(201).json({ mensagem: 'Feedback recebido! Aguardando aprovação.' });
+
+  } catch (err) {
+
+    res.status(500).json({ erro: 'Erro ao salvar feedback' });
+
+  }
+
+});
+
+
+
+// 2. Buscar Feedbacks Aprovados (Para index.html e feedbacks.html)
+
+app.get('/feedbacks/aprovados', async (req, res) => {
+
+  try {
+
+    const feedbacks = await Feedback.find({ status: 'aprovado' }).sort({ data: -1 });
+
+    res.json(feedbacks);
+
+  } catch (err) {
+
+    res.status(500).json({ erro: 'Erro ao buscar feedbacks' });
+
+  }
+
+});
+
+
+
+// 3. Buscar TODOS ou Pendentes (Para admin.html)
+
+app.get('/admin/feedbacks', async (req, res) => {
+
+  try {
+
+    const feedbacks = await Feedback.find().sort({ data: -1 });
+
+    res.json(feedbacks);
+
+  } catch (err) {
+
+    res.status(500).json({ erro: 'Erro ao carregar feedbacks para admin' });
+
+  }
+
+});
+
+
+
+// 4. Aprovar Feedback (Para admin.html)
+
+app.put('/admin/feedbacks/:id/aprovar', async (req, res) => {
+
+  try {
+
+    await Feedback.findByIdAndUpdate(req.params.id, { status: 'aprovado' });
+
+    res.json({ mensagem: 'Feedback aprovado com sucesso!' });
+
+  } catch (err) {
+
+    res.status(500).json({ erro: 'Erro ao aprovar feedback' });
+
+  }
+
+});
+
+
+
+// 5. Deletar Feedback (Para admin.html)
+
+app.delete('/admin/feedbacks/:id', async (req, res) => {
+
+  try {
+
+    await Feedback.findByIdAndDelete(req.params.id);
+
+    res.json({ mensagem: 'Feedback removido!' });
+
+  } catch (err) {
+
+    res.status(500).json({ erro: 'Erro ao deletar feedback' });
+
+  }
+
+});
+
+// ENVIAR MENSAGEM
+
+app.post("/contato", async (req, res) => {
+
+    try {
+
+        const novaMensagem = new Mensagem(req.body);
+
+
+
+        await novaMensagem.save();
+
+
+
+        res.status(201).json({
+
+            sucesso: true,
+
+            mensagem: "Mensagem enviada!"
+
+        });
+
+
+
+    } catch (erro) {
+
+        res.status(500).json({
+
+            sucesso: false
+
+        });
+
+    }
+
+});
+
+
+
+
+
+// LISTAR MENSAGENS
+
+app.get("/mensagens", async (req, res) => {
+
+
+
+    const mensagens = await Mensagem.find().sort({ data: -1 });
+
+
+
+    res.json(mensagens);
+
+});
+
+
+
+
+
+// APAGAR MENSAGEM
+
+app.delete("/mensagens/:id", async (req, res) => {
+
+
+
+    await Mensagem.findByIdAndDelete(req.params.id);
+
+
+
+    res.json({
+
+        sucesso: true
+
+    });
+
+
+
+});
+
+
+
+app.listen(3000, () => {
+
+    console.log("Servidor rodando");
+
+}); 
+
