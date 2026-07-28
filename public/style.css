@@ -148,7 +148,7 @@ nav a.btn-orcamento::after {
   font-size: 1.8rem;
   color: var(--text-dark);
   cursor: pointer;
-  z-index: 1002;
+  z-index: 1004;
 }
 
 /* ================= HERO ================= */
@@ -1174,7 +1174,7 @@ nav a.btn-orcamento::after {
     justify-content: center;
     gap: 30px;
     box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
-    z-index: 1001;
+    z-index: 1003;
   }
 
   nav.active {
@@ -1227,6 +1227,71 @@ nav a.btn-orcamento::after {
 
   .sobre-imagem::before {
     display: none;
+  }
+
+  /* ===== Carrossel de Serviços — mobile ===== */
+  .servicos {
+    padding: 60px 20px 70px;
+  }
+
+  .servicos-topo {
+    margin-bottom: 45px;
+  }
+
+  .servicos-carousel {
+    padding-bottom: 45px;
+  }
+
+  .servico-card {
+    padding: 40px 26px 44px;
+    border-radius: 20px;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .servico-icone {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    margin-bottom: 22px;
+  }
+
+  .servico-icone i {
+    font-size: 28px;
+  }
+
+  .servico-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+
+  .servico-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .servico-card ul li {
+    margin-bottom: 10px;
+    font-size: 14.5px;
+  }
+
+  .servicos-carousel .swiper-pagination {
+    bottom: 0;
+  }
+
+  .servicos-carousel .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
+    opacity: 0.25;
+    background: var(--primary);
+  }
+
+  .servicos-carousel .swiper-pagination-bullet-active {
+    opacity: 1;
+    width: 22px;
+    border-radius: 4px;
   }
 }
 @media(max-width: 991px) {
@@ -1354,7 +1419,114 @@ nav a.btn-orcamento::after {
   font-size: 1.05rem;
   line-height: 1.6;
 }
+/* ================= BOX DE RESULTADO DO ORÇAMENTO ================= */
+.resultado-box {
+  background: var(--white);
+  max-width: 720px;
+  margin: 30px auto 0;
+  padding: 35px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--primary);
+  animation: fadeIn 0.4s ease;
+}
 
+.resultado-box h3 {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.resultado-detalhes p {
+  font-size: 1.05rem;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.resultado-detalhes hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+
+.preco-estimado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-light);
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.preco-estimado span {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.preco-estimado strong {
+  font-size: 1.8rem;
+  color: var(--primary);
+}
+
+.resultado-detalhes small {
+  color: #777;
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 25px;
+}
+
+.btn-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background-color: #25d366;
+  color: #fff !important;
+  padding: 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebd59;
+  transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Botão de Voltar no topo do Resultado */
+.btn-voltar {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  margin-bottom: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background: var(--primary);
+  color: #fff;
+}
 #formOrcamento {
   background: var(--white);
   max-width: 720px;
