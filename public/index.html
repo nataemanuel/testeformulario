@@ -141,7 +141,7 @@
         <div class="servico-card fade swiper-slide">
           <div class="servico-icone"><i class="fa-solid fa-building"></i></div>
           <h3>Transporte Empresarial</h3>
-          <p>Soluções corporativas completas para empresas que precisam transportar colaboradores com.</p>
+          <p>Soluções corporativas completas para empresas que precisam transportar colaboradores com segurança, conforto e pontualidade.</p>
           <ul>
             <li><i class="fa-solid fa-check"></i> Atendimento corporativo</li>
             <li><i class="fa-solid fa-check"></i> Viagens programadas</li>
@@ -206,53 +206,27 @@
     </div>
   </section>
 
-  <section class="feedbacks" id="feedbacks">
+<section class="feedbacks" id="feedbacks">
     <div class="container">
+      
       <div class="feedbacks-topo">
+        <button type="button" id="btnAbrirModalFeedback" class="btn-escrever-topo">
+          <i class="fa-solid fa-pen"></i> Escrever Feedback
+        </button>
         <span class="servicos-subtitulo">FEEDBACKS</span>
         <h2>O QUE DIZEM NOSSOS PASSAGEIROS</h2>
       </div>
-      
-      <div class="feedbacks-grid">
-        <div class="card-feedback">
-          <div class="feedback-estrelas">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p>"Empresa de extrema confiança. Trabalho na colheita e usamos o transporte do Seu Irineu todos os dias. Nunca atrasa e o ônibus é sempre limpo."</p>
-          <div class="feedback-usuario">
-            <h4>José Almeida</h4>
-            <span>Trabalhador Rural</span>
-          </div>
-        </div>
 
-        <div class="card-feedback">
-          <div class="feedback-estrelas">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p>"Fechamos uma excursão regional com a Manga Transportes e o atendimento do início ao fim foi impecável. Motorista prudente e atencioso."</p>
-          <div class="feedback-usuario">
-            <h4>Mariana Souza</h4>
-            <span>Organizadora de Eventos</span>
-          </div>
-        </div>
-
-        <div class="card-feedback">
-          <div class="feedback-estrelas">
-            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-          </div>
-          <p>"Contratamos para o fretamento dos colaboradores da nossa usina. Pontualidade britânica e excelente custo-benefício para nossa empresa."</p>
-          <div class="feedback-usuario">
-            <h4>Ricardo Dias</h4>
-            <span>Gestor de RH</span>
-          </div>
-        </div>
+      <div class="feedbacks-grid fade">
+        <p style="text-align: center; width: 100%;">Carregando depoimentos...</p>
       </div>
 
-      <div class="feedbacks-action">
-        <a href="#" class="btn-ver-mais">
+      <div class="feedbacks-action fade">
+        <a href="feedbacks.html" class="btn-ver-mais">
           Ver Mais <i class="fa-solid fa-plus"></i>
         </a>
       </div>
+
     </div>
   </section>
 
@@ -357,9 +331,36 @@
       </div>
     </div>
   </footer>
+<div id="modalFeedback" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="fechar-modal">&times;</span>
+    <h3>Deixe seu Feedback</h3>
+    <form id="formFeedback">
+      <label for="fbNome">Seu Nome:</label>
+      <input type="text" id="fbNome" required placeholder="Ex: Maria Silva">
 
+      <label for="fbCargo">Ocupação/Empresa:</label>
+      <input type="text" id="fbCargo" required placeholder="Ex: Trabalhadora Rural / Cliente">
+
+      <label for="fbEstrelas">Avaliação:</label>
+      <select id="fbEstrelas" required>
+        <option value="5">⭐⭐⭐⭐⭐ (5 Estrelas)</option>
+        <option value="4">⭐⭐⭐⭐ (4 Estrelas)</option>
+        <option value="3">⭐⭐⭐ (3 Estrelas)</option>
+        <option value="2">⭐⭐ (2 Estrelas)</option>
+        <option value="1">⭐ (1 Estrela)</option>
+      </select>
+
+      <label for="fbMensagem">Seu Depoimento:</label>
+      <textarea id="fbMensagem" required placeholder="Conte como foi sua experiência..."></textarea>
+
+      <button type="submit" class="form-submit-button">Enviar Feedback</button>
+    </form>
+  </div>
+</div>
   <div id="toast" class="toast">Mensagem enviada com sucesso!</div>
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
 </body>
 </html>
