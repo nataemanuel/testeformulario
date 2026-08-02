@@ -952,7 +952,7 @@ nav a.btn-orcamento::after {
 }
 
 .servico-card:hover {
-  transform: translateY(-10px);
+  
 
   border-color: rgba(12, 122, 53, 0.18);
   box-shadow: 0 22px 45px rgba(12, 122, 53, 0.14);
