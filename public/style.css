@@ -41,7 +41,8 @@ html {
 }
 
 body {
-  font-family: "Montserrat", sans-serif;
+  font-family: "Inter", sans-serif;
+  
   background: var(--white);
   color: #222;
   overflow-x: hidden;
