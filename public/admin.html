@@ -1,261 +1,1306 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Admin - Painel de Controle</title>
-  <link rel="stylesheet" href="style2.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Administração | Manga Transportes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css">
+
   <style>
-    .admin-container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 40px auto 60px;
+    :root {
+      --verde: #0a4f21;
+      --verde-hover: #083d19;
+      --verde-claro: #eaf6ee;
+
+      --dourado: #d5a437;
+      --dourado-claro: #fff8e6;
+
+      --branco: #ffffff;
+      --fundo: #f5f7f6;
+      --cinza-100: #f1f3f2;
+      --cinza-200: #e4e8e6;
+      --cinza-500: #6b7280;
+      --cinza-700: #374151;
+      --preto: #18221d;
+
+      --vermelho: #dc3545;
+      --vermelho-claro: #fff0f1;
+
+      --amarelo: #f59e0b;
+      --amarelo-claro: #fff7df;
+
+      --sombra: 0 8px 25px rgba(10, 79, 33, 0.07);
+      --raio: 14px;
     }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: var(--fundo);
+      color: var(--preto);
+      min-height: 100vh;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    .topbar {
+      background: var(--branco);
+      border-bottom: 1px solid var(--cinza-200);
+      height: 78px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .topbar-content {
+      width: min(1200px, 92%);
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .brand-logo {
+      width: 170px;
+      height: 62px;
+      object-fit: contain;
+      object-position: left center;
+      display: block;
+    }
+
+    .brand-text {
+      padding-left: 18px;
+      border-left: 1px solid var(--cinza-200);
+    }
+
+    .brand-text span {
+      font-size: 12px;
+      color: var(--cinza-500);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .admin-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      background: var(--verde-claro);
+      color: var(--verde);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+    }
+
+    /* =========================
+       CONTAINER
+    ========================= */
+
+    .admin-container {
+      width: min(1200px, 92%);
+      margin: 38px auto 60px;
+    }
+
+    .welcome {
+      margin-bottom: 30px;
+    }
+
+    .welcome h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--preto);
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: var(--cinza-500);
+      font-size: 14px;
+    }
+
+    /* =========================
+       ESTATÍSTICAS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 42px;
+    }
+
+    .stat-card {
+      background: var(--branco);
+      border: 1px solid var(--cinza-200);
+      border-radius: var(--raio);
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 17px;
+      box-shadow: var(--sombra);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(10, 79, 33, 0.10);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      flex-shrink: 0;
+    }
+
+    .icon-feedback {
+      background: var(--dourado-claro);
+      color: var(--dourado);
+    }
+
+    .icon-pendente {
+      background: var(--amarelo-claro);
+      color: var(--amarelo);
+    }
+
+    .icon-mensagem {
+      background: var(--verde-claro);
+      color: var(--verde);
+    }
+
+    .stat-info span {
+      display: block;
+      color: var(--cinza-500);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .stat-info strong {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--preto);
+    }
+
+    /* =========================
+       SEÇÕES
+    ========================= */
+
+    .section {
+      margin-bottom: 45px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 9px;
+      background: var(--verde);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+    }
+
+    .section-title h2 {
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .section-count {
+      font-size: 12px;
+      color: var(--cinza-500);
+      background: var(--cinza-100);
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* =========================
+       GRID
+    ========================= */
+
     .grid-admin {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 25px;
-      margin-bottom: 50px;
+      gap: 18px;
     }
-    .secao-titulo {
-      color: #0c7a35;
-      font-size: 1.8rem;
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid #d5a437;
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    .card-mensagem {
+      background: var(--branco);
+      border: 1px solid var(--cinza-200);
+      border-radius: var(--raio);
+      padding: 21px;
+      box-shadow: var(--sombra);
+      transition: 0.2s ease;
+      position: relative;
+      overflow: hidden;
     }
-    .btn-aprovar {
-      background: #0c7a35;
-      color: #ffffff;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
+
+    .card-mensagem:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(10, 79, 33, 0.10);
     }
-    .btn-aprovar:hover {
-      background: #085625;
+
+    .card-aprovado {
+      border-left: 4px solid var(--verde);
     }
+
+    .card-pendente {
+      border-left: 4px solid var(--amarelo);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 15px;
+    }
+
+    .card-header h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--preto);
+      line-height: 1.4;
+    }
+
+    .card-cargo {
+      display: block;
+      color: var(--cinza-500);
+      font-size: 11px;
+      font-weight: 500;
+      margin-top: 3px;
+    }
+
+    .card-date {
+      color: var(--cinza-500);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .estrelas {
+      color: var(--dourado);
+      letter-spacing: 1px;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    .card-mensagem-texto {
+      color: var(--cinza-700);
+      font-size: 13px;
+      line-height: 1.7;
+      margin-bottom: 16px;
+      word-break: break-word;
+    }
+
+    .card-mensagem-texto.feedback {
+      background: var(--cinza-100);
+      border-radius: 9px;
+      padding: 13px;
+      font-style: italic;
+    }
+
+    .card-email {
+      font-size: 12px;
+      color: var(--cinza-500);
+      background: var(--cinza-100);
+      padding: 9px 11px;
+      border-radius: 7px;
+      margin-bottom: 12px;
+      word-break: break-all;
+    }
+
+    .card-email strong {
+      color: var(--cinza-700);
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
     .status-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.85rem;
-      font-weight: bold;
-      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 9px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
     }
+
     .status-pendente {
-      background: #fff3cd;
-      color: #856404;
+      background: var(--amarelo-claro);
+      color: #a16207;
     }
+
     .status-aprovado {
-      background: #d4edda;
-      color: #155724;
+      background: var(--verde-claro);
+      color: var(--verde);
+    }
+
+    /* =========================
+       BOTÕES
+    ========================= */
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 18px;
+      padding-top: 15px;
+      border-top: 1px solid var(--cinza-200);
+    }
+
+    button {
+      font-family: inherit;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 9px 13px;
+      font-size: 11px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-aprovar {
+      background: var(--verde);
+      color: white;
+    }
+
+    .btn-aprovar:hover {
+      background: var(--verde-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-apagar {
+      background: var(--vermelho-claro);
+      color: var(--vermelho);
+    }
+
+    .btn-apagar:hover {
+      background: #ffe0e3;
+      transform: translateY(-1px);
+    }
+
+    .publicado {
+      color: var(--verde);
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: auto;
+    }
+
+    /* =========================
+       ESTADO VAZIO
+    ========================= */
+
+    .empty-state {
+      background: var(--branco);
+      border: 1px dashed var(--cinza-200);
+      border-radius: var(--raio);
+      padding: 45px 20px;
+      text-align: center;
+      grid-column: 1 / -1;
+    }
+
+    .empty-icon {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 13px;
+      background: var(--cinza-100);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      color: var(--cinza-500);
+    }
+
+    .empty-state h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .empty-state p {
+      font-size: 12px;
+      color: var(--cinza-500);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    .footer {
+      border-top: 1px solid var(--cinza-200);
+      background: var(--branco);
+      padding: 22px 15px;
+      text-align: center;
+    }
+
+    .footer p {
+      color: var(--cinza-500);
+      font-size: 11px;
+    }
+
+    .footer a {
+      color: var(--verde);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 768px) {
+
+      .topbar {
+        height: 70px;
+      }
+
+      .admin-container {
+        width: 94%;
+        margin-top: 28px;
+      }
+
+      .welcome h2 {
+        font-size: 23px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 35px;
+      }
+
+      .stat-card {
+        padding: 17px;
+      }
+
+      .grid-admin {
+        grid-template-columns: 1fr;
+      }
+
+      .brand-logo {
+        width: 140px;
+        height: 52px;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .admin-status {
+        display: none;
+      }
+
+      .section-header {
+        align-items: flex-start;
+      }
+
+      .card-header {
+        flex-direction: column;
+      }
+
+      .card-date {
+        white-space: normal;
+      }
+    }
+
+    @media (max-width: 450px) {
+
+      .brand-text h1 {
+        font-size: 15px;
+      }
+
+      .section-title h2 {
+        font-size: 16px;
+      }
+
+      .card-actions {
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        flex: 1;
+        justify-content: center;
+      }
     }
   </style>
 </head>
+
 <body>
 
-  <h1>Painel Administrativo</h1>
+  <!-- =========================
+       TOPO
+  ========================== -->
 
-  <div class="admin-container">
-    
-    <h2 class="secao-titulo">Feedbacks dos Clientes</h2>
-    <div id="listaFeedbacksAdmin" class="grid-admin"></div>
+  <header class="topbar">
+    <div class="topbar-content">
 
-    <h2 class="secao-titulo">Mensagens Recebidas</h2>
-    <div id="listaMensagens" class="grid-admin"></div>
+      <div class="brand">
+        <img
+          src="/img/logo.png"
+          alt="Manga Transportes"
+          class="brand-logo"
+        >
 
-  </div>
+        <div class="brand-text">
+          <span>Painel Administrativo</span>
+        </div>
+      </div>
+
+      <div class="admin-status">
+        <span class="status-dot"></span>
+        Sistema online
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =========================
+       CONTEÚDO
+  ========================== -->
+
+  <main class="admin-container">
+
+    <div class="welcome">
+      <h2>Painel de Controle</h2>
+      <p>Gerencie os feedbacks e mensagens recebidas pelo site.</p>
+    </div>
+
+
+    <!-- =========================
+         ESTATÍSTICAS
+    ========================== -->
+
+    <div class="stats">
+
+      <div class="stat-card">
+        <div class="stat-icon icon-feedback">★</div>
+
+        <div class="stat-info">
+          <span>Total de feedbacks</span>
+          <strong id="totalFeedbacks">0</strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-pendente">◷</div>
+
+        <div class="stat-info">
+          <span>Aguardando aprovação</span>
+          <strong id="feedbacksPendentes">0</strong>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon icon-mensagem">✉</div>
+
+        <div class="stat-info">
+          <span>Mensagens recebidas</span>
+          <strong id="totalMensagens">0</strong>
+        </div>
+      </div>
+
+    </div>
+
+
+    <!-- =========================
+         FEEDBACKS
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div class="section-title">
+
+          <div class="section-title-icon">
+            ★
+          </div>
+
+          <h2>Feedbacks dos clientes</h2>
+
+        </div>
+
+        <span class="section-count" id="contadorFeedbacks">
+          0 registros
+        </span>
+
+      </div>
+
+      <div id="listaFeedbacksAdmin" class="grid-admin"></div>
+
+    </section>
+
+
+    <!-- =========================
+         MENSAGENS
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-header">
+
+        <div class="section-title">
+
+          <div class="section-title-icon">
+            ✉
+          </div>
+
+          <h2>Mensagens recebidas</h2>
+
+        </div>
+
+        <span class="section-count" id="contadorMensagens">
+          0 mensagens
+        </span>
+
+      </div>
+
+      <div id="listaMensagens" class="grid-admin"></div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
 
   <footer class="footer">
+
     <p>
-      © 2026 Todos os direitos reservados.
+      © 2026 Manga Transportes ·
       Desenvolvido por
-      <a href="https://instagram.com/SEU_USUARIO" target="_blank" rel="noopener noreferrer">
+      <a
+        href="https://instagram.com/SEU_USUARIO"
+        target="_blank"
+        rel="noopener noreferrer">
         Natã Emanuel
       </a>
     </p>
+
   </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
   <script>
-    // 1. FORMATAR DATA
+
+    /* =========================
+       FORMATAR DATA
+    ========================== */
+
     function formatarData(dataString) {
-      if (!dataString) return "Data desconhecida";
+
+      if (!dataString) {
+        return "Data desconhecida";
+      }
+
       const data = new Date(dataString);
-      return data.toLocaleString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
+
+      return data.toLocaleString("pt-BR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
       });
+
     }
 
-    // 2. CARREGAR FEEDBACKS DO BANCO DE DADOS
+
+    /* =========================
+       FEEDBACKS
+    ========================== */
+
     async function carregarFeedbacksAdmin() {
+
       try {
+
         const res = await fetch("/admin/feedbacks");
+
         const feedbacks = await res.json();
-        const container = document.getElementById("listaFeedbacksAdmin");
+
+        const container =
+          document.getElementById("listaFeedbacksAdmin");
 
         if (!container) return;
+
         container.innerHTML = "";
 
+        const total = Array.isArray(feedbacks)
+          ? feedbacks.length
+          : 0;
+
+        const pendentes = Array.isArray(feedbacks)
+          ? feedbacks.filter(fb => fb.status !== "aprovado").length
+          : 0;
+
+        document.getElementById("totalFeedbacks").textContent = total;
+
+        document.getElementById("feedbacksPendentes").textContent =
+          pendentes;
+
+        document.getElementById("contadorFeedbacks").textContent =
+          `${total} ${total === 1 ? "registro" : "registros"}`;
+
+
         if (!Array.isArray(feedbacks) || feedbacks.length === 0) {
-          container.innerHTML = "<p>Nenhum feedback recebido até o momento.</p>";
+
+          container.innerHTML = `
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                ★
+              </div>
+
+              <h3>Nenhum feedback recebido</h3>
+
+              <p>
+                Os feedbacks enviados pelos clientes aparecerão aqui.
+              </p>
+
+            </div>
+          `;
+
           return;
         }
 
+
         feedbacks.forEach(fb => {
-          const aprovado = fb.status === 'aprovado';
-          const qtdEstrelas = fb.estrelas || 5;
-          const estrelasHtml = '★'.repeat(qtdEstrelas);
+
+          const aprovado = fb.status === "aprovado";
+
+          const qtdEstrelas = Math.min(
+            Math.max(Number(fb.estrelas) || 5, 1),
+            5
+          );
+
+          const estrelasHtml =
+            "★".repeat(qtdEstrelas) +
+            `<span style="opacity:.25;">${"★".repeat(5 - qtdEstrelas)}</span>`;
+
 
           container.innerHTML += `
-            <div class="card-mensagem ${aprovado ? 'card-aprovado' : ''}">
+
+            <article class="card-mensagem ${aprovado ? "card-aprovado" : "card-pendente"}">
+
               <div class="card-header">
-                <h3>${fb.nome} <small style="font-size: 0.85rem; color: #666;">(${fb.cargo})</small></h3>
-                <span style="color: #d5a437; font-size: 1.2rem;">${estrelasHtml}</span>
-              </div>
-              <p style="margin-top: 10px;">"${fb.mensagem}"</p>
-              
-              <div>
-                <span class="status-badge ${aprovado ? 'status-aprovado' : 'status-pendente'}">
-                  ${fb.status ? fb.status.toUpperCase() : 'PENDENTE'}
-                </span>
+
+                <div>
+
+                  <h3>
+                    ${fb.nome || "Cliente"}
+                  </h3>
+
+                  <span class="card-cargo">
+                    ${fb.cargo || "Cliente"}
+                  </span>
+
+                </div>
+
+                <div class="estrelas">
+                  ${estrelasHtml}
+                </div>
+
               </div>
 
-              <div style="margin-top: 18px; display: flex; gap: 10px; align-items: center;">
-                ${!aprovado ? `
-                  <button class="btn-aprovar" onclick="aprovarFeedback('${fb._id}')">
-                    Aprovar / Publicar
-                  </button>
-                ` : '<span style="color: #0c7a35; font-weight: bold;">✓ Publicado no site</span>'}
 
-                <button class="btn-apagar" onclick="excluirFeedback('${fb._id}')">
-                  Excluir
+              <p class="card-mensagem-texto feedback">
+                "${fb.mensagem || ""}"
+              </p>
+
+
+              <span class="status-badge ${
+                aprovado
+                  ? "status-aprovado"
+                  : "status-pendente"
+              }">
+
+                ${aprovado ? "✓ Publicado" : "◷ Pendente"}
+
+              </span>
+
+
+              <div class="card-actions">
+
+                ${
+                  !aprovado
+                    ? `
+                      <button
+                        class="btn btn-aprovar"
+                        onclick="aprovarFeedback('${fb._id}')">
+
+                        ✓ Aprovar
+
+                      </button>
+                    `
+                    : `
+                      <span class="publicado">
+                        ✓ Publicado no site
+                      </span>
+                    `
+                }
+
+
+                <button
+                  class="btn btn-apagar"
+                  onclick="excluirFeedback('${fb._id}')">
+
+                  🗑 Excluir
+
                 </button>
+
               </div>
-            </div>
+
+            </article>
+
           `;
+
         });
+
       } catch (err) {
-        console.error("Erro ao carregar feedbacks:", err);
+
+        console.error(
+          "Erro ao carregar feedbacks:",
+          err
+        );
+
       }
+
     }
 
-    // 3. APROVAR FEEDBACK
+
+    /* =========================
+       APROVAR FEEDBACK
+    ========================== */
+
     async function aprovarFeedback(id) {
+
       try {
-        const res = await fetch(`/admin/feedbacks/${id}/aprovar`, { method: "PUT" });
+
+        const res = await fetch(
+          `/admin/feedbacks/${id}/aprovar`,
+          {
+            method: "PUT"
+          }
+        );
+
+
         if (res.ok) {
-          Swal.fire({
+
+          await Swal.fire({
+
             title: "Publicado!",
             text: "O feedback agora está visível no site.",
             icon: "success",
+
             timer: 1500,
+
             showConfirmButton: false
+
           });
+
           carregarFeedbacksAdmin();
+
         }
+
       } catch (err) {
-        console.error("Erro ao aprovar feedback:", err);
+
+        console.error(
+          "Erro ao aprovar feedback:",
+          err
+        );
+
       }
+
     }
 
-    // 4. EXCLUIR FEEDBACK
+
+    /* =========================
+       EXCLUIR FEEDBACK
+    ========================== */
+
     function excluirFeedback(id) {
+
       Swal.fire({
-        title: "Excluir Feedback?",
-        text: "Essa ação não poderá ser desfeita.",
+
+        title: "Excluir feedback?",
+
+        text:
+          "Essa ação não poderá ser desfeita.",
+
         icon: "warning",
+
         showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Sim, excluir",
-        cancelButtonText: "Cancelar"
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await fetch(`/admin/feedbacks/${id}`, { method: "DELETE" });
-          carregarFeedbacksAdmin();
-          Swal.fire("Excluído!", "O feedback foi removido.", "success");
+
+        confirmButtonColor: "#dc3545",
+
+        cancelButtonColor: "#6b7280",
+
+        confirmButtonText:
+          "Sim, excluir",
+
+        cancelButtonText:
+          "Cancelar"
+
+      }).then(async result => {
+
+        if (!result.isConfirmed) return;
+
+
+        try {
+
+          const res = await fetch(
+            `/admin/feedbacks/${id}`,
+            {
+              method: "DELETE"
+            }
+          );
+
+
+          if (res.ok) {
+
+            carregarFeedbacksAdmin();
+
+            Swal.fire({
+
+              title: "Excluído!",
+
+              text:
+                "O feedback foi removido.",
+
+              icon: "success",
+
+              timer: 1500,
+
+              showConfirmButton: false
+
+            });
+
+          }
+
+        } catch (err) {
+
+          console.error(err);
+
         }
+
       });
+
     }
 
-    // 5. CARREGAR MENSAGENS DE CONTATO
+
+    /* =========================
+       MENSAGENS
+    ========================== */
+
     async function carregarMensagens() {
+
       try {
-        const resposta = await fetch("/mensagens");
-        const mensagens = await resposta.json();
-        const lista = document.getElementById("listaMensagens");
+
+        const resposta =
+          await fetch("/mensagens");
+
+        const mensagens =
+          await resposta.json();
+
+        const lista =
+          document.getElementById("listaMensagens");
 
         if (!lista) return;
+
         lista.innerHTML = "";
 
-        if (!Array.isArray(mensagens) || mensagens.length === 0) {
-          lista.innerHTML = "<p>Nenhuma mensagem recebida.</p>";
+
+        const total =
+          Array.isArray(mensagens)
+            ? mensagens.length
+            : 0;
+
+
+        document.getElementById(
+          "totalMensagens"
+        ).textContent = total;
+
+
+        document.getElementById(
+          "contadorMensagens"
+        ).textContent =
+          `${total} ${
+            total === 1
+              ? "mensagem"
+              : "mensagens"
+          }`;
+
+
+        if (
+          !Array.isArray(mensagens) ||
+          mensagens.length === 0
+        ) {
+
+          lista.innerHTML = `
+
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                ✉
+              </div>
+
+              <h3>Nenhuma mensagem recebida</h3>
+
+              <p>
+                As mensagens enviadas pelo formulário aparecerão aqui.
+              </p>
+
+            </div>
+
+          `;
+
           return;
+
         }
+
 
         mensagens.forEach(msg => {
-          const dataFormatada = formatarData(msg.data);
+
+          const dataFormatada =
+            formatarData(msg.data);
+
 
           lista.innerHTML += `
-            <div class="card-mensagem">
+
+            <article class="card-mensagem">
+
               <div class="card-header">
-                <h3>${msg.nome}</h3>
-                <span class="card-date">${dataFormatada}</span>
+
+                <div>
+
+                  <h3>
+                    ${msg.nome || "Visitante"}
+                  </h3>
+
+                </div>
+
+                <span class="card-date">
+                  ${dataFormatada}
+                </span>
+
               </div>
-              <p class="card-email"><strong>E-mail:</strong> ${msg.email}</p>
-              <p>${msg.mensagem}</p>
-              <button class="btn-apagar" onclick="apagarMensagem('${msg._id}')">
-                Apagar
-              </button>
-            </div>
+
+
+              <p class="card-email">
+
+                <strong>E-mail:</strong>
+                ${msg.email || "Não informado"}
+
+              </p>
+
+
+              <p class="card-mensagem-texto">
+                ${msg.mensagem || ""}
+              </p>
+
+
+              <div class="card-actions">
+
+                <span
+                  class="publicado"
+                  style="color:#6b7280;">
+
+                  ✉ Mensagem recebida
+
+                </span>
+
+                <button
+                  class="btn btn-apagar"
+                  onclick="apagarMensagem('${msg._id}')">
+
+                  🗑 Apagar
+
+                </button>
+
+              </div>
+
+            </article>
+
           `;
+
         });
+
+
       } catch (err) {
-        console.error("Erro ao carregar mensagens:", err);
+
+        console.error(
+          "Erro ao carregar mensagens:",
+          err
+        );
+
       }
+
     }
 
-    // 6. APAGAR MENSAGEM DE CONTATO
+
+    /* =========================
+       APAGAR MENSAGEM
+    ========================== */
+
     function apagarMensagem(id) {
+
       Swal.fire({
-        title: "Tem certeza?",
-        text: "Você não poderá reverter esta ação!",
+
+        title: "Apagar mensagem?",
+
+        text:
+          "Você não poderá reverter esta ação.",
+
         icon: "warning",
+
         showCancelButton: true,
-        confirmButtonColor: "#d33",
-        cancelButtonColor: "#3085d6",
-        confirmButtonText: "Sim, apagar!",
-        cancelButtonText: "Cancelar"
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          await fetch(`/mensagens/${id}`, { method: "DELETE" });
-          carregarMensagens();
-          Swal.fire({
-            title: "Apagado!",
-            text: "A mensagem foi removida com sucesso.",
-            icon: "success",
-            timer: 1500,
-            showConfirmButton: false
-          });
+
+        confirmButtonColor: "#dc3545",
+
+        cancelButtonColor: "#6b7280",
+
+        confirmButtonText:
+          "Sim, apagar",
+
+        cancelButtonText:
+          "Cancelar"
+
+      }).then(async result => {
+
+        if (!result.isConfirmed) return;
+
+
+        try {
+
+          const res = await fetch(
+            `/mensagens/${id}`,
+            {
+              method: "DELETE"
+            }
+          );
+
+
+          if (res.ok) {
+
+            carregarMensagens();
+
+            Swal.fire({
+
+              title: "Apagado!",
+
+              text:
+                "A mensagem foi removida com sucesso.",
+
+              icon: "success",
+
+              timer: 1500,
+
+              showConfirmButton: false
+
+            });
+
+          }
+
+        } catch (err) {
+
+          console.error(err);
+
         }
+
       });
+
     }
 
-    // INITIALIZAÇÃO AO CARREGAR A PÁGINA
-    document.addEventListener("DOMContentLoaded", () => {
-      carregarFeedbacksAdmin();
-      carregarMensagens();
-    });
+
+    /* =========================
+       INICIALIZAÇÃO
+    ========================== */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        carregarFeedbacksAdmin();
+
+        carregarMensagens();
+
+      }
+    );
+
   </script>
+
 </body>
 </html>
