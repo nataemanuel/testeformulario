@@ -951,16 +951,9 @@ nav a.btn-orcamento::after {
   transition: transform 0.45s ease;
 }
 
-.servico-card:hover {
-  
 
-  border-color: rgba(12, 122, 53, 0.18);
-  box-shadow: 0 22px 45px rgba(12, 122, 53, 0.14);
-}
 
-.servico-card:hover::before {
-  transform: scaleX(1);
-}
+
 
 .servico-icone {
   width: 68px;
@@ -979,9 +972,7 @@ nav a.btn-orcamento::after {
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.servico-card:hover .servico-icone {
-  transform: scale(1.08) rotate(-4deg);
-}
+
 
 .servico-icone i {
   color: var(--primary);
@@ -1066,11 +1057,7 @@ nav a.btn-orcamento::after {
   transform: scale(1.04);
 }
 
-.servico-card.destaque:hover {
-  transform: scale(1.04) translateY(-10px);
 
-  box-shadow: 0 26px 55px rgba(12, 122, 53, 0.35);
-}
 
 .servico-selo {
   position: absolute;
@@ -1815,7 +1802,13 @@ nav a.btn-orcamento::after {
 
   font-size: 1.3rem;
 }
+#toastFeedback {
+    bottom: -150px;
+}
 
+#toastFeedback.show {
+    bottom: 40px;
+}
 
 /* =========================================================
    MODAL DE FEEDBACK
