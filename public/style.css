@@ -1120,7 +1120,9 @@ nav a.btn-orcamento::after {
 
   background: var(--primary);
 }
-
+.frota .container {
+  max-width: 1400px;
+}
 .subtitulo {
   display: block;
 
@@ -1155,7 +1157,7 @@ nav a.btn-orcamento::after {
   display: grid;
   grid-template-columns: repeat(
     auto-fit,
-    minmax(320px, 1fr)
+    minmax(360px, 1fr)
   );
   gap: 30px;
 }
@@ -1172,9 +1174,7 @@ nav a.btn-orcamento::after {
   transition: var(--transition);
 }
 
-.card-frota:hover {
-  transform: translateY(-8px);
-}
+
 
 .imagem {
   position: relative;
