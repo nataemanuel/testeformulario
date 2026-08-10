@@ -312,6 +312,35 @@ nav a.btn-orcamento::after {
   font-weight: 800;
 }
 
+/* Animação de escrita (typewriter) */
+.typing-line {
+  display: inline-block;
+  min-height: 1.1em;
+}
+
+.typing-line.typing-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  margin-left: 4px;
+  background: var(--accent);
+  vertical-align: -0.1em;
+  animation: piscar-cursor 0.8s steps(1) infinite;
+}
+
+@keyframes piscar-cursor {
+  0%, 50% { opacity: 1; }
+  50.01%, 100% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .typing-line.typing-cursor::after {
+    animation: none;
+    opacity: 1;
+  }
+}
+
 .line {
   width: 90px;
   height: 4px;
@@ -1313,33 +1342,41 @@ nav a.btn-orcamento::after {
   text-transform: uppercase;
 }
 
+.sobre h2,
+.servicos h2,
+.frota h2,
+.feedbacks-topo h2,
+.contact-info h2 {
+    font-size: 2.2rem !important;
+    line-height: 1.2;
+    font-weight: 800;
+}
 
 /* Botão escrever */
 
 .btn-escrever-topo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  margin-bottom: 20px;
-  padding: 10px 22px;
+    margin: 20px auto 40px;
 
-  background: var(--primary);
-  color: var(--white);
+    padding: 10px 22px;
 
-  border: none;
-  border-radius: 25px;
+    background: var(--primary);
+    color: var(--white);
 
-  font-size: 0.9rem;
-  font-weight: 700;
+    border: none;
+    border-radius: 25px;
 
-  cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 700;
 
-  box-shadow: 0 4px 12px rgba(12, 122, 53, 0.2);
+    cursor: pointer;
 
-  transition: 0.3s ease;
+    box-shadow: 0 4px 12px rgba(12, 122, 53, 0.2);
+    transition: 0.3s ease;
 }
-
 .btn-escrever-topo:hover {
   background: var(--primary-dark);
 
