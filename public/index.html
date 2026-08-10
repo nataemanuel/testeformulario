@@ -17,9 +17,7 @@
 
   <header>
     <div class="logo">
-    <a href="index.html">
       <img src="img/logo.png" alt="Manga Transportes" width="120px" height="75px">
-    </a>
   </div>
 
     <div class="menu-toggle" id="menu-toggle">
@@ -40,8 +38,8 @@
   <section class="hero">
     <div class="hero-content">
     <h2 class="fade">
-  Bem-vindo à<br>
-  <span class="nowrap">Manga Transportes!</span>
+  <span class="typing-line" id="typeLine1"></span><br>
+  <span class="nowrap typing-line" id="typeLine2"></span>
 </h2>
 
       <div class="line fade"></div>
@@ -272,13 +270,16 @@
     <div class="container">
       
       <div class="feedbacks-topo">
-        <button type="button" id="btnAbrirModalFeedback" class="btn-escrever-topo">
-          <i class="fa-solid fa-pen"></i> Escrever Feedback
-        </button>
+      
         <span class="servicos-subtitulo">FEEDBACKS</span>
-        <h2>O QUE DIZEM NOSSOS PASSAGEIROS</h2>
-      </div>
 
+        <h2>O QUE DIZEM NOSSOS PASSAGEIROS</h2>
+        <button type="button" id="btnAbrirModalFeedback" class="btn-escrever-topo">
+         
+          <i class="fa-solid fa-pen"></i> Avalie-nos
+        </button>
+      </div>
+  
       <div class="feedbacks-grid fade">
         <p style="text-align: center; width: 100%;">Carregando depoimentos...</p>
       </div>
@@ -423,6 +424,60 @@
   <div id="toast" class="toast">Mensagem enviada com sucesso!</div>
   <script src="script.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  
+  <script>
+    // Animação de escrita (typewriter) do título do hero
+    document.addEventListener("DOMContentLoaded", function () {
+      var linha1 = document.getElementById("typeLine1");
+      var linha2 = document.getElementById("typeLine2");
+      if (!linha1 || !linha2) return;
+
+      var texto1 = "Bem-vindo à";
+      var texto2 = "Manga Transportes!";
+      var velocidade = 70; // ms por letra
+      var pausaEntreLinhas = 250; // ms
+
+      function digitar(elemento, texto, indice, aoTerminar) {
+        elemento.classList.add("typing-cursor");
+        if (indice < texto.length) {
+          elemento.textContent += texto.charAt(indice);
+          setTimeout(function () {
+            digitar(elemento, texto, indice + 1, aoTerminar);
+          }, velocidade);
+        } else {
+          elemento.classList.remove("typing-cursor");
+          if (aoTerminar) aoTerminar();
+        }
+      }
+
+      function iniciarAnimacao() {
+        digitar(linha1, texto1, 0, function () {
+          setTimeout(function () {
+            digitar(linha2, texto2, 0, null);
+          }, pausaEntreLinhas);
+        });
+      }
+
+      var titulo = linha1.closest("h2");
+
+      // Se o título usa a classe "fade" controlada por scroll, espera ficar visível
+      if (titulo && titulo.classList.contains("fade") && !titulo.classList.contains("visivel")) {
+        var observer = new MutationObserver(function (mutations, obs) {
+          if (titulo.classList.contains("visivel")) {
+            iniciarAnimacao();
+            obs.disconnect();
+          }
+        });
+        observer.observe(titulo, { attributes: true, attributeFilter: ["class"] });
+
+        // Segurança: caso a classe "visivel" nunca seja adicionada
+        setTimeout(function () {
+          observer.disconnect();
+          if (linha1.textContent === "") iniciarAnimacao();
+        }, 1500);
+      } else {
+        iniciarAnimacao();
+      }
+    });
+  </script>
 </body>
 </html>
