@@ -1,0 +1,115 @@
+:root {
+    --color-primary: #138e3c;
+    --color-secondary: #E8A736;
+    --color-text-dark: #333;
+    --color-text-light: #fff;
+    --color-background-light: #f5f5f5;
+  
+    --color-dark-footer: #181818;
+    --color-footer-text: #f1f1f1;
+    --color-footer-border: rgb(0, 0, 0);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+   
+    color: var(--color-text-dark);
+    
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Container */
+.container { max-width: 1400px; margin: 0 auto; padding: 0 20px; }
+
+/* Header */
+.header { padding: 20px 0; background-color: transparent; position: absolute; top: 0; left: 0; width: 100%; z-index: 1000; }
+.header-content-wrapper { display: flex; justify-content: space-between; align-items: center; }
+.logo { font-family: 'Montserrat', sans-serif; font-weight: 700; }
+.logo img { height: 60px; width: auto; display: block; }
+
+/* Menu / Navegação */
+.nav-menu { display: flex; gap: 15px; align-items: center; }
+.nav-menu a { text-decoration: none; color: var(--color-text-light); padding: 10px 0px; margin: 0 8px; font-weight: 600; transition: color 0.3s; position: relative; display: inline-block; }
+.nav-menu a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 50%; background-color: var(--color-secondary); transition: width 0.3s ease-out, left 0.3s ease-out; }
+.nav-menu a:hover { color: var(--color-secondary); text-decoration: none; }
+.nav-menu a:hover::after { width: 100%; left: 0; }
+
+.cta-button { background-color: transparent; color: var(--color-secondary); border: 2px solid var(--color-secondary); padding: 12px 25px; text-decoration: none; border-radius: 5px; font-weight: 700; transition: all 0.3s ease; display: inline-block; margin-top: 0; line-height: 1; }
+.cta-button:hover { background-color: var(--color-secondary); color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.cta-button.menu-cta { background-color: var(--color-primary); color: white; border: 2px solid var(--color-primary); padding: 10px 20px; margin-left: 10px; margin-top: 0; }
+.cta-button.menu-cta:hover { background-color: var(--color-primary); color: white; border-color: var(--color-primary); transform: none; box-shadow: none; }
+.nav-menu a.cta-button.menu-cta::after { content: none; }
+
+/* Menu Mobile (toggle) */
+.menu-toggle { display: none; font-size: 28px; background: none; border: none; cursor: pointer; color: var(--color-secondary); transition: color 0.3s ease; }
+.menu-toggle .icon-close { display: none; }
+.menu-toggle.active .icon-open { display: none; }
+.menu-toggle.active .icon-close { display: block; }
+.menu-toggle:hover { color: #ff9b33; }
+
+/* Rodapé */
+.footer-moderno { background-color: var(--color-dark-footer); color: var(--color-footer-text); padding: 60px 0 0; font-size: 0.95rem; }
+.footer-grid { display: grid; grid-template-columns: 1.8fr 0.8fr 1.4fr; gap: 40px; padding-bottom: 40px; }
+.footer-logo-img { max-width: 150px; height: auto; margin-bottom: 20px; display: block; }
+.col-info .slogan-text { font-size: 1.1rem; font-weight: 600; line-height: 1.5; margin-bottom: 15px; color: var(--color-secondary); }
+.col-info .description-text { font-size: 0.9rem; line-height: 1.6; opacity: 0.8; }
+.footer-moderno h4 { font-family: 'Montserrat', sans-serif; color: var(--color-text-light); margin-bottom: 25px; font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; padding-bottom: 5px; border-bottom: 2px solid var(--color-secondary); display: inline-block; }
+.footer-moderno ul { list-style: none; padding: 0; }
+.footer-moderno ul li { margin-bottom: 12px; }
+.footer-moderno a { color: var(--color-footer-text); text-decoration: none; transition: color 0.3s, padding-left 0.3s; }
+.footer-moderno a:hover { color: var(--color-secondary); padding-left: 5px; }
+
+.col-contato .contato-item { display: flex; align-items: flex-start; margin-bottom: 18px; }
+.col-contato .contato-item i { font-size: 1.1rem; margin-right: 12px; color: var(--color-secondary); margin-top: 4px; width: 20px; text-align: center; }
+.col-contato .contato-item span, .col-contato .contato-item div { color: var(--color-footer-text); }
+.col-contato .contato-item strong { color: #fff; font-weight: 600; display: block; margin-bottom: 2px; }
+
+.social-links { margin-top: 25px; display: flex; gap: 15px; }
+.social-links a { font-size: 1.4rem; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--color-footer-text); color: var(--color-footer-text); transition: all 0.3s; }
+.social-links a:hover { background-color: var(--color-secondary); color: var(--color-dark-footer); border-color: var(--color-secondary); transform: translateY(-2px); }
+
+.footer-copyright { text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 25px 0; font-size: 0.85rem; color: rgba(255, 255, 255, 0.6); }
+.footer-copyright a { color: rgba(255, 255, 255, 0.6); font-weight: 600; margin-left: 10px; }
+.footer-copyright a:hover { color: var(--color-secondary); }
+
+/* Seção de Política (conteúdo específico) */
+.policy-section { padding: 140px 0 80px; background-color: var(--color-background-white); min-height: 100vh; }
+.policy-content { max-width: 1000px; margin: 0 auto; padding: 0 20px; line-height: 1.8; color: var(--color-text-dark); }
+.policy-content h1 { font-family: 'Montserrat', sans-serif; font-size: 3rem; color: var(--color-primary); margin-bottom: 20px; border-bottom: 3px solid var(--color-secondary); padding-bottom: 10px; display: inline-block; font-weight: 700; }
+.policy-content h2 { font-family: 'Montserrat', sans-serif; font-size: 1.8rem; color: var(--color-secondary); margin-top: 40px; margin-bottom: 15px; font-weight: 600; }
+.policy-content h3 { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; color: var(--color-primary); margin-top: 25px; margin-bottom: 10px; font-weight: 700; }
+.policy-content p, .policy-content ul { font-size: 1.05rem; margin-bottom: 20px; color: #333; }
+.policy-content ul { padding-left: 25px; list-style: disc; }
+.policy-content li { margin-bottom: 10px; }
+.policy-content strong { font-weight: 700; color: var(--color-primary); }
+.policy-content a { color: var(--color-secondary); text-decoration: underline; transition: color 0.3s ease; }
+.policy-content a:hover { color: var(--color-primary); }
+.policy-content .update-date { display: block; font-style: italic; font-size: 0.9rem; color: #777; margin-bottom: 40px; }
+
+/* Media Queries relevantes */
+@media (max-width: 853px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .nav-menu { position: fixed; top: 0; right: -100%; height: 100vh; width: 70%; max-width: 350px; background-color: var(--color-dark-footer); flex-direction: column; display: flex; align-items: flex-start; padding: 80px 30px 20px; box-shadow: -5px 0 15px rgba(0,0,0,0.5); transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); z-index: 999; overflow-y: auto; }
+    body.menu-open::before { content: ''; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); z-index: 998; opacity: 1; transition: opacity 0.4s ease; }
+    body.menu-open { overflow-y: hidden; }
+    .nav-menu.active { right: 0; }
+    .nav-menu a, .nav-menu .cta-button { width: 100%; padding: 18px 0; margin: 0; text-align: left; font-weight: 600; font-family: 'Montserrat', sans-serif; color: var(--color-footer-text); border-bottom: 1px solid var(--color-footer-border); transition: background-color 0.3s ease, color 0.3s ease, padding 0.3s ease; position: static; }
+    .nav-menu a::after { content: none; }
+    .nav-menu .cta-button { margin-top: 20px; padding: 15px 20px; text-align: center; border-bottom: none; border-radius: 8px; }
+    .nav-menu a:not(.cta-button):hover { background-color: rgba(255, 255, 255, 0.05); color: var(--color-secondary); padding-left: 10px; }
+    .menu-toggle { display: block; z-index: 1000; }
+}
+
+@media (max-width: 480px) {
+    .cta-button { padding: 10px 20px; font-size: 0.9rem; }
+    .nav-menu { width: 85%; }
+}
+
+@media (max-width: 768px) {
+    .policy-content h1 { font-size: 2rem; text-align: center; width: 100%; }
+    .policy-content h2 { font-size: 1.5rem; }
+    .policy-content h3 { font-size: 1.1rem; }
+    .policy-section { padding-top: 100px; }
+}
