@@ -26,8 +26,7 @@ body {
 /* Header */
 .header { padding: 20px 0; background-color: transparent; position: absolute; top: 0; left: 0; width: 100%; z-index: 1000; }
 .header-content-wrapper { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-family: 'Montserrat', sans-serif; font-weight: 700; }
-.logo img { height: 60px; width: auto; display: block; }
+
 
 /* Menu / Navegação */
 .nav-menu { display: flex; gap: 15px; align-items: center; }
