@@ -133,33 +133,6 @@
       </div>
     </div>
   </footer>
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // MENU MOBILE
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        const body = document.body;
-        const navLinks = document.querySelectorAll('.nav-menu a');
-
-        menuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
-            menuToggle.classList.toggle('active');
-
-            const isMenuOpen = navMenu.classList.contains('active');
-            menuToggle.setAttribute('aria-label', isMenuOpen ? 'Fechar menu' : 'Abrir menu');
-        });
-        
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                menuToggle.classList.remove('active');
-            });
-        });
-
-        // As animações de scroll (.animate-on-scroll) não são necessárias nesta página, mas o script do menu é essencial.
-    });
-    </script>
+   <script src="script.js"></script>
 </body>
 </html>
