@@ -2431,21 +2431,14 @@ nav a.btn-orcamento::after {
 
   /* Seção Sobre */
 
-  .sobre {
-    text-align: center;
-  }
+
 
   .sobre-subtitulo::after {
     left: 50%;
     transform: translateX(-50%);
   }
 
-  .sobre-cards .card,
-  .visao-box {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+  
 
   .sobre-texto p {
     text-align: center;
@@ -2453,19 +2446,13 @@ nav a.btn-orcamento::after {
 
   /* Seção Contato */
 
-  .contact-content {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+
 
   .contact-details li {
     justify-content: center;
   }
 
-  .cta-button {
-    justify-content: center;
-  }
+  
 
   .contact-form-wrapper {
     width: 100%;
