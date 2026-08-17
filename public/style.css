@@ -2427,7 +2427,50 @@ nav a.btn-orcamento::after {
   }
 }
 
+@media (max-width: 768px) {
 
+  /* Seção Sobre */
+
+  .sobre {
+    text-align: center;
+  }
+
+  .sobre-subtitulo::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .sobre-cards .card,
+  .visao-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .sobre-texto p {
+    text-align: center;
+  }
+
+  /* Seção Contato */
+
+  .contact-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .contact-details li {
+    justify-content: center;
+  }
+
+  .cta-button {
+    justify-content: center;
+  }
+
+  .contact-form-wrapper {
+    width: 100%;
+  }
+}
 /* =========================================================
    RESPONSIVIDADE — ATÉ 768PX
 ========================================================= */
@@ -2479,6 +2522,7 @@ nav a.btn-orcamento::after {
   /* Sobre */
 
   .sobre-container {
+    
     padding: 0 20px;
   }
 
