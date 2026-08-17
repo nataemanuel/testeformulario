@@ -2427,37 +2427,6 @@ nav a.btn-orcamento::after {
   }
 }
 
-@media (max-width: 768px) {
-
-  /* Seção Sobre */
-
-
-
-  .sobre-subtitulo::after {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  
-
-  .sobre-texto p {
-    text-align: center;
-  }
-
-  /* Seção Contato */
-
-
-
-  .contact-details li {
-    justify-content: center;
-  }
-
-  
-
-  .contact-form-wrapper {
-    width: 100%;
-  }
-}
 /* =========================================================
    RESPONSIVIDADE — ATÉ 768PX
 ========================================================= */
