@@ -6,6 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 :root {
@@ -251,6 +252,26 @@ nav a.btn-orcamento::after {
 
   cursor: pointer;
   z-index: 1004;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  outline: none;
+}
+
+.menu-toggle i {
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.menu-toggle:focus,
+.menu-toggle:active,
+.menu-toggle i:focus,
+.menu-toggle i:active {
+  outline: none;
+  background: none;
+  box-shadow: none;
 }
 
 
@@ -1168,10 +1189,18 @@ nav a.btn-orcamento::after {
   text-transform: uppercase;
 }
 
+.frota-topo {
+  max-width: 850px;
+
+  margin: 0 auto 50px;
+
+  text-align: center;
+}
+
 .frota h2 {
   max-width: 800px;
 
-  margin: 0 auto 50px;
+  margin: 35px auto 25px;
 
   color: var(--white);
 
@@ -1180,6 +1209,13 @@ nav a.btn-orcamento::after {
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   line-height: 1.3;
   font-weight: 800;
+}
+
+.frota-topo p {
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 18px;
+  line-height: 1.9;
 }
 
 .frota-grid {
@@ -2475,6 +2511,29 @@ nav a.btn-orcamento::after {
   }
 
 
+  /* Contato — centralizado no mobile (exceto o formulário) */
+
+  .contact-content {
+    align-items: center;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+  }
+
+  .contact-details li {
+    justify-content: center;
+  }
+
+  .cta-button {
+    margin: 0 auto;
+  }
+
+
   /* Sobre */
 
   .sobre-container {
@@ -2506,7 +2565,7 @@ nav a.btn-orcamento::after {
   }
 
   .servico-card {
-    min-height: 380px;
+    min-height: 470px;
 
     padding: 40px 26px 44px;
 
@@ -2706,5 +2765,154 @@ nav a.btn-orcamento::after {
 
   .preco-estimado strong {
     font-size: 1.5rem;
+  }
+}
+
+/* =========================================================
+   FOOTER MOBILE — ESTILO ACCORDION
+   Desktop permanece com o layout original.
+========================================================= */
+
+.footer-accordion-title {
+  display: none;
+}
+
+@media (max-width: 600px) {
+
+  .footer-moderno {
+    padding: 42px 0 0;
+    background: #141414;
+  }
+
+  .footer-moderno > .container {
+    padding: 0 22px;
+  }
+
+  .footer-moderno .col-info {
+    padding-bottom: 26px;
+  }
+
+  .footer-logo-img {
+    width: auto;
+    max-width: 125px;
+    margin-bottom: 22px;
+  }
+
+  .footer-moderno .col-info > div {
+    margin-bottom: 16px;
+  }
+
+  .footer-moderno .footer-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 0;
+  }
+
+  .footer-moderno .footer-accordion {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .footer-moderno .footer-accordion:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .footer-moderno .footer-accordion-title {
+    width: 100%;
+    min-height: 62px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: transparent;
+    border: 0;
+    color: var(--white);
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-align: left;
+  }
+.footer-moderno .footer-accordion-title span {
+  display: inline-block;
+  width: fit-content;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--accent);
+}
+  .footer-moderno .footer-accordion-title i {
+    color: #bdbdbd;
+    font-size: 0.85rem;
+    transition: transform 0.3s ease;
+  }
+
+  .footer-moderno .footer-accordion.is-open .footer-accordion-title i {
+    transform: rotate(45deg);
+    color: var(--accent);
+  }
+
+  .footer-moderno .footer-accordion > h4 {
+    display: none;
+  }
+
+  .footer-moderno .footer-accordion > ul,
+  .footer-moderno .footer-accordion > .contato-item {
+    display: none;
+  }
+
+  .footer-moderno .footer-accordion.is-open > ul {
+    display: block;
+    padding: 0 0 18px;
+  }
+
+  .footer-moderno .footer-accordion.is-open > .contato-item {
+    display: flex;
+    padding: 0 0 18px;
+  }
+
+  .footer-moderno .footer-accordion.is-open > br {
+    display: none;
+  }
+
+  .footer-moderno .footer-accordion ul li {
+    margin-bottom: 0;
+  }
+
+  .footer-moderno .footer-accordion ul li + li {
+    margin-top: 14px;
+  }
+
+  .footer-moderno .footer-accordion a {
+    display: block;
+    padding: 3px 0;
+    color: #bdbdbd;
+    font-size: 0.86rem;
+  }
+
+  .footer-moderno .footer-accordion a:hover {
+    padding-left: 0;
+    color: var(--accent);
+  }
+
+  .footer-moderno .footer-accordion .contato-item {
+    align-items: center;
+    gap: 12px;
+    color: #bdbdbd;
+    font-size: 0.86rem;
+  }
+
+  .footer-moderno .footer-accordion .contato-item i {
+    width: 20px;
+    color: var(--accent);
+    text-align: center;
+  }
+
+  .footer-copyright {
+    margin-top: 0;
+    padding: 22px 20px;
+    font-size: 0.72rem;
+    line-height: 1.55;
   }
 }

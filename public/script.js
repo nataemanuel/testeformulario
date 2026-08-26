@@ -33,19 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================= 3. CARROSSEL SWIPER (SERVIÇOS) =================
   const carouselEl = document.querySelector('.servicos-carousel');
   if (carouselEl && typeof Swiper !== 'undefined') {
-    new Swiper('.servicos-carousel', {
-      slidesPerView: 1.12,
-      spaceBetween: 18,
+    const servicosSwiper = new Swiper('.servicos-carousel', {
+      slidesPerView: 1.15,
+      spaceBetween: 16,
       centeredSlides: true,
       grabCursor: true,
+      observer: true,
+      observeParents: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
       },
       breakpoints: {
         480: {
-          slidesPerView: 1.15,
-          spaceBetween: 22,
+          slidesPerView: 1.05,
+          spaceBetween: 20,
           centeredSlides: true,
         },
         768: {
@@ -60,6 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
           allowTouchMove: false,
         }
       }
+    });
+
+    // Recalcula a largura dos slides após tudo (imagens, fontes) carregar,
+    // corrigindo o card inicial que às vezes fica sem o "pedacinho" do próximo.
+    window.addEventListener('load', () => {
+      servicosSwiper.update();
     });
   }
 
