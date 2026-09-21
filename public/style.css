@@ -2849,7 +2849,7 @@ nav a.btn-orcamento::after {
   }
 
   .footer-moderno .footer-accordion.is-open .footer-accordion-title i {
-    transform: rotate(45deg);
+    transform: rotate(180deg);
     color: var(--accent);
   }
 
