@@ -1,0 +1,137 @@
+/* ================= ADMIN MENSAGENS ================= */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #f8f8f5;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  text-align: center;
+  margin: 100px 0 40px;
+  color: #0c7a35;
+  font-size: 2.5rem;
+  font-weight: 800;
+}
+
+#listaMensagens {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+/* Card */
+
+.card-mensagem {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border-top: 5px solid #d5a437;
+  transition: 0.3s ease;
+}
+
+.card-mensagem:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.card-header h3 {
+  color: #0c7a35;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.card-date {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.card-email {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.card-email strong {
+  color: #0c7a35;
+}
+
+.card-mensagem p {
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Botão */
+
+.btn-apagar {
+  margin-top: 20px;
+  width: 100%;
+  border: none;
+  background: #d33;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: 0.3s;
+}
+
+.btn-apagar:hover {
+  background: #b71c1c;
+}
+
+/* Footer */
+
+.footer {
+  margin-top: auto;
+  background: #141414;
+  padding: 25px;
+  text-align: center;
+}
+
+.footer p {
+  color: #ccc;
+}
+
+.footer a {
+  color: #d5a437;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.footer a:hover {
+  color: #ffffff;
+}
+
+/* Responsividade */
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+    margin-top: 80px;
+  }
+
+  #listaMensagens {
+    width: 95%;
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
