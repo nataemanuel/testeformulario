@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Entrar | Manga Transportes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Montserrat", sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      padding: 42px 35px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      color: white;
+    }
+
+    .logo {
+      display: block;
+      width: 190px;
+      max-width: 100%;
+      margin: 0 auto 25px;
+      object-fit: contain;
+    }
+
+    h1 {
+      font-size: 25px;
+      text-align: center;
+      margin-bottom: 9px;
+    }
+
+    .subtitulo {
+      text-align: center;
+      color: #cbd5e1;
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 9px;
+      outline: none;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-family: inherit;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    input:focus {
+      border-color: #d5a437;
+    }
+
+    input::placeholder {
+      color: #94a3b8;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 9px;
+      background: #0c7a35;
+      color: white;
+      font-family: inherit;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #09612a;
+      transform: translateY(-1px);
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    #erro {
+      display: none;
+      color: #fca5a5;
+      font-size: 12px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .rodape {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 11px;
+      margin-top: 28px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="login-card">
+
+    <img
+      src="/img/logo.png"
+      alt="Manga Transportes"
+      class="logo"
+    >
+
+    <h1>Bem-vindo!</h1>
+
+    <p class="subtitulo">
+      Acesse o painel administrativo
+    </p>
+
+    <form id="formLogin">
+
+      <label for="usuario">Usuário</label>
+
+      <input
+        type="text"
+        id="usuario"
+        placeholder="Digite seu usuário"
+        autocomplete="username"
+        required
+      >
+
+      <label for="senha">Senha</label>
+
+      <input
+        type="password"
+        id="senha"
+        placeholder="Digite sua senha"
+        autocomplete="current-password"
+        required
+      >
+
+      <p id="erro"></p>
+
+      <button type="submit" id="btnEntrar">
+        Entrar no painel
+      </button>
+
+    </form>
+
+    <div class="rodape">
+      © 2026 Manga Transportes
+    </div>
+
+  </div>
+
+  <script>
+    const form = document.getElementById("formLogin");
+    const erro = document.getElementById("erro");
+    const botao = document.getElementById("btnEntrar");
+
+    // Se já estiver autenticado, vai direto ao painel
+    fetch("/auth/me")
+      .then(res => {
+        if (res.ok) {
+          window.location.replace("/admin");
+        }
+      })
+      .catch(() => {});
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      erro.style.display = "none";
+      botao.disabled = true;
+      botao.textContent = "Entrando...";
+
+      const usuario = document.getElementById("usuario").value;
+      const senha = document.getElementById("senha").value;
+
+      try {
+        const resposta = await fetch("/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ usuario, senha })
+        });
+
+        const dados = await resposta.json();
+
+        if (!resposta.ok) {
+          throw new Error(dados.erro || "Não foi possível entrar.");
+        }
+
+        window.location.replace("/admin");
+
+      } catch (err) {
+        erro.textContent = err.message;
+        erro.style.display = "block";
+
+      } finally {
+        botao.disabled = false;
+        botao.textContent = "Entrar no painel";
+      }
+    });
+  </script>
+
+</body>
+</html>
