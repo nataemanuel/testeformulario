@@ -1817,15 +1817,35 @@ nav a.btn-orcamento::after {
 
 .footer-copyright {
   padding: 25px 0;
-
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-
   color: #888;
-
   font-size: 0.85rem;
-
   text-align: center;
 }
+
+.footer-copyright .container {
+  position: relative;
+  padding-left: 55px;
+  padding-right: 55px;
+}
+
+.admin-footer-link {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: var(--accent, #d5a437);
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 50%;
+  transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+}
+
 
 
 /* =========================================================
@@ -2978,4 +2998,16 @@ nav a.btn-orcamento::after {
     100% {
         transform: translateX(100%);
     }
+}
+
+
+@media (max-width: 600px) {
+  .footer-copyright .container {
+    padding-left: 12px;
+    padding-right: 48px;
+  }
+
+  .admin-footer-link {
+    right: 8px;
+  }
 }
