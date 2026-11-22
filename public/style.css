@@ -1845,7 +1845,10 @@ nav a.btn-orcamento::after {
   border-radius: 50%;
   transition: color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
-
+.admin-footer-link:focus-visible {
+  outline: 2px solid var(--accent, #d5a437);
+  outline-offset: 3px;
+}
 
 
 /* =========================================================
