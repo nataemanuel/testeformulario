@@ -3212,6 +3212,94 @@ nav a.btn-orcamento::after {
     line-height: 1.55;
   }
 }
+
+@media (max-width: 390px) {
+
+  header {
+    padding: 0 14px;
+  }
+
+  .logo img {
+    max-width: 105px;
+  }
+
+  .hero {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .hero h2 {
+    font-size: 1.85rem;
+  }
+
+  .hero p {
+    font-size: 0.88rem;
+  }
+
+  .hero-btn {
+    padding: 11px 16px;
+    font-size: 0.85rem;
+  }
+
+  .sobre-container {
+    padding: 0 17px;
+  }
+
+  .sobre-texto h2 {
+    font-size: 1.65rem;
+  }
+
+  .card {
+    gap: 10px;
+  }
+
+  .icone,
+  .icone-visao {
+    width: 43px;
+    min-width: 43px;
+    height: 43px;
+  }
+
+  .servicos {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .servicos-topo h2 {
+    font-size: 1.45rem !important;
+  }
+
+  .servico-card {
+    padding: 25px 18px;
+  }
+
+  .servico-selo {
+    right: -42px;
+    font-size: 0.6rem;
+  }
+
+  .conteudo {
+    padding: 18px;
+  }
+
+  .card-feedback {
+    padding: 20px;
+  }
+
+  .contact-form {
+    padding: 20px 15px;
+  }
+
+  .resultado-box {
+    padding: 20px 15px;
+  }
+
+  .footer-moderno > .container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
 /* =========================================================
    ANIMAÇÃO DE ABERTURA — PAGE REVEAL
 ========================================================= */
